@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Simulate network delay
         setTimeout(() => {
-            locationEl.textContent = 'Santiago, Chile (Ejemplo)'; // Change when city is confirmed
+            locationEl.textContent = 'Viña del Mar, Chile'; // Change when city is confirmed
             tempEl.textContent = '18°C';
             descEl.textContent = 'Parcialmente nublado';
             // Update icon classes if needed
