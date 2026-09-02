@@ -17,9 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
+
+                // Close mobile menu on navigation
+                const navLinksContainer = document.querySelector('.nav-links');
+                if (navLinksContainer) {
+                    navLinksContainer.classList.remove('active');
+                }
             }
         });
     });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu');
+    const navLinksContainer = document.querySelector('.nav-links');
+    if (mobileMenuBtn && navLinksContainer) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+    }
 
     // 2. Active Link Highlighting on Scroll
     const sections = document.querySelectorAll('section, header');
@@ -80,32 +95,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadWeather();
 
-    // 6. Radio Player Logic
-    const radioAudio = document.getElementById('radio-stream');
-    const playBtn = document.getElementById('radio-play-btn');
-    const playIcon = document.getElementById('radio-play-icon');
-    const liveDot = document.getElementById('radio-live-dot');
-    const statusText = document.getElementById('radio-status-text');
-
-    if (playBtn && radioAudio) {
-        playBtn.addEventListener('click', () => {
-            if (radioAudio.paused) {
-                statusText.textContent = 'Conectando...';
-                radioAudio.play().then(() => {
-                    playIcon.className = 'fa-solid fa-stop';
-                    liveDot.classList.add('playing');
-                    statusText.textContent = 'Transmitiendo en Vivo';
-                }).catch(error => {
-                    console.error("Error reproduciendo audio:", error);
-                    statusText.textContent = 'Error (Revisa tu conexión)';
-                });
-            } else {
-                radioAudio.pause();
-                radioAudio.src = radioAudio.src; // Reset stream connection to save data
-                playIcon.className = 'fa-solid fa-play';
-                liveDot.classList.remove('playing');
-                statusText.textContent = 'Listo para escuchar';
-            }
-        });
-    }
 });
