@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Desde la Punta del Cerro y Más Allá | Colegio Nazareo</title>
+    <meta name="description" content="Radio escolar del Colegio Nazareo. Transmitiendo en vivo todos los miércoles a las 13:00 hrs.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass-effect">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="assets/logo.png" alt="Logo Colegio Nazareo" style="height: 40px;">
+                <span>Radio Nazareo</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#en-vivo" class="active">En Vivo</a></li>
+                <li><a href="#episodios">Episodios</a></li>
+                <li><a href="#equipo">El Equipo</a></li>
+                <li><a href="#clima">Clima</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <span class="badge">🎙️ Colegio Nazareo</span>
+            <h1>Desde la punta del cerro <span class="gradient-text">y más allá</span></h1>
+            <p class="subtitle">Acompáñanos todos los <strong>Miércoles a las 13:00 hrs</strong>. ¡Sintoniza nuestra energía escolar!</p>
+            <div class="hero-buttons">
+                <a href="#en-vivo" class="btn btn-primary"><i class="fa-solid fa-play"></i> Ver Transmisión</a>
+                <a href="#episodios" class="btn btn-spotify"><i class="fa-brands fa-spotify"></i> Escuchar Podcast</a>
+            </div>
+            
+
+        </div>
+        <div class="hero-graphics">
+            <!-- Decorative elements -->
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="sound-wave">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- En Vivo Section -->
+    <section id="en-vivo" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transmisión <span class="gradient-text">En Vivo</span> <span class="live-indicator"></span></h2>
+                <p>Escúchanos o míranos en directo. ¡No te pierdas ningún programa!</p>
+            </div>
+            
+            <div class="media-grid">
+
+                <!-- Listen2MyRadio Iframe -->
+                <div class="media-card glass-card" style="max-width: 400px; margin: 0 auto; width: 100%;">
+                    <div class="card-header">
+                        <i class="fa-solid fa-radio" style="color: var(--accent-secondary);"></i>
+                        <h3>Audio en Vivo</h3>
+                    </div>
+                    <div class="card-body" style="padding: 0; overflow: hidden; aspect-ratio: 9/16; width: 100%; height: auto; border-bottom-left-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius);">
+                        <iframe src="https://radionazareo.listen2myshow.com/" width="100%" height="100%" style="border:none;" scrolling="yes" allow="autoplay" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                    </div>
+                </div>
+
+                <!-- Instagram Story -->
+                <div class="media-card glass-card" style="max-width: 400px; margin: 0 auto; width: 100%;">
+                    <div class="card-header">
+                        <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+                        <h3>Historia de Hoy</h3>
+                    </div>
+                    <div class="card-body" style="padding: 0; overflow: hidden; aspect-ratio: 9/16; width: 100%; height: auto; border-bottom-left-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius); background: #000;">
+                        <img src="assets/historia.jpg" alt="Historia de Instagram" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Episodios Section -->
+    <section id="episodios" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>Podcast & <span class="gradient-text">Episodios</span></h2>
+                <p>Revive las grabaciones y programas oficiales en Spotify cuando tú quieras.</p>
+            </div>
+
+            <div class="episodes-container glass-card">
+                <div class="episode-details">
+                    <div class="episode-tag">
+                        <span class="badge-spotify"><i class="fa-brands fa-spotify"></i> Podcast Oficial · En Vivo & Grabado</span>
+                    </div>
+                    <h3 class="episode-title">Desde la Punta del cerro y más allá</h3>
+                    <p class="episode-subtitle">El Podcast del Colegio Nazareo</p>
+                    <p class="episode-desc">
+                        Sintoniza todas nuestras emisiones, conversaciones, entrevistas y la energía de nuestros estudiantes y profesores. Escucha el último capítulo o revive los anteriores directamente desde aquí.
+                    </p>
+                    <div class="episode-meta">
+                        <span><i class="fa-solid fa-podcast"></i> Episodios Completos</span>
+                        <span><i class="fa-solid fa-rotate"></i> Actualizado automáticamente</span>
+                        <span><i class="fa-solid fa-microphone"></i> Colegio Nazareo</span>
+                    </div>
+                    <div class="episode-actions">
+                        <a href="https://open.spotify.com/show/2euOEAlQutCqdzQcsWM5pZ" target="_blank" rel="noopener noreferrer" class="btn btn-spotify">
+                            <i class="fa-brands fa-spotify"></i> Seguir en Spotify
+                        </a>
+                    </div>
+                </div>
+
+                <div class="episode-player">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px; width: 100%;" src="https://open.spotify.com/embed/show/2euOEAlQutCqdzQcsWM5pZ?utm_source=generator&si=77832f2aa74c4ab0" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipo Section -->
+    <section id="equipo" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro <span class="gradient-text">Equipo</span></h2>
+                <p>Las voces detrás del micrófono del Colegio Nazareo.</p>
+            </div>
+            
+            <!-- Profesores / Conducción -->
+            <div class="team-profesores">
+                <div class="team-card glass-card pro-card">
+                    <div class="avatar avatar-glow"><i class="fa-solid fa-sliders"></i></div>
+                    <span class="role-badge"><i class="fa-solid fa-microphone-lines"></i> Conducción & Técnica</span>
+                    <h3>Tío Benja</h3>
+                    <p class="role">Fonoaudiólogo & Conductor</p>
+                    <p class="pro-bio">
+                        Voz ancla y coordinador de la radio. Modera las conversaciones en cabina, orienta al equipo y está al mando de las perillas y controles técnicos para que cada emisión suene impecable.
+                    </p>
+                </div>
+                <div class="team-card glass-card pro-card">
+                    <div class="avatar avatar-glow"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <span class="role-badge"><i class="fa-solid fa-bolt"></i> Dinamismo & Conducción</span>
+                    <h3>Tía Gabi</h3>
+                    <p class="role">Profesora & Locutora</p>
+                    <p class="pro-bio">
+                        Co-conductora del programa. Con su estilo joven, alegre y dinámico, contagia entusiasmo, anima cada debate y llena el estudio de vitalidad y buena energía.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Panel Estudiantil -->
+            <div class="team-subheading">
+                <span class="badge"><i class="fa-solid fa-users"></i> Panel Estudiantil</span>
+                <h3>Nuestras 5 Voces Jóvenes</h3>
+                <p>El corazón y la energía escolar que llena de vida cada programa.</p>
+            </div>
+
+            <div class="students-grid">
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-heart"></i> Alegre & Cooperadora</span>
+                    <h3>Victoria Rojas</h3>
+                    <p class="student-bio">
+                        Llena de energía positiva y siempre dispuesta a sumar en equipo. Su alegría ilumina la cabina y contagia entusiasmo a oyentes y compañeros.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-award"></i> Respetuoso & Carismático</span>
+                    <h3>Dakari Caviedes</h3>
+                    <p class="student-bio">
+                        Dueño de un carisma natural y un trato siempre respetuoso. Su serenidad y cercanía generan conversaciones amenas e inspiradoras en cabina.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-bolt"></i> Inteligente & Animosa</span>
+                    <h3>Fernanda Suárez</h3>
+                    <p class="student-bio">
+                        Agudeza mental y espíritu siempre despierto. Aporta opiniones claras, reflexiones enriquecedoras y un impulso constante a cada emisión.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-sun"></i> Alegre & Comprensiva</span>
+                    <h3>Ahinoa Gómez</h3>
+                    <p class="student-bio">
+                        Destaca por su empatía y calidez humana. Su capacidad para escuchar y comprender a los demás crea una atmósfera acogedora frente al micrófono.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-face-laugh-beam"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-masks-theater"></i> Cómica & Agradable</span>
+                    <h3>Nicol Del Valle</h3>
+                    <p class="student-bio">
+                        La chispa humorística y agradable del programa. Con su simpatía y espontaneidad saca sonrisas en el estudio y hace cada episodio inolvidable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clima Section -->
+    <section id="clima" class="section alt-bg">
+        <div class="container">
+            <div class="weather-widget glass-card">
+                <div class="weather-info">
+                    <h2>Estado del Clima</h2>
+                    <p id="weather-location">Cargando ubicación...</p>
+                    <div class="weather-temp">
+                        <i class="fa-solid fa-cloud-sun" id="weather-icon"></i>
+                        <span id="temperature">--°C</span>
+                    </div>
+                    <p id="weather-desc">Cargando datos climatológicos...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Logo Colegio Nazareo" style="height: 50px;">
+                <h2>Desde la punta del cerro y más allá</h2>
+            </div>
+            <p>El programa radial del Colegio Nazareo.</p>
+            <div class="social-links">
+                <a href="https://open.spotify.com/show/2euOEAlQutCqdzQcsWM5pZ" target="_blank" rel="noopener noreferrer" class="spotify-link" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Colegio Nazareo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
