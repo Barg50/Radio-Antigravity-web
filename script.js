@@ -31,8 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const navLinksContainer = document.querySelector('.nav-links');
     if (mobileMenuBtn && navLinksContainer) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
+        const toggleMenu = () => {
+            const isOpen = navLinksContainer.classList.toggle('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+        };
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileMenuBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMenu();
+            }
         });
     }
 
@@ -61,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Navbar Background Effect on Scroll
     const navbar = document.querySelector('.navbar');
+    const backToTopBtn = document.getElementById('back-to-top');
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.style.background = 'rgba(15, 23, 42, 0.9)'; // Darker slate
@@ -68,6 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navbar.style.background = 'rgba(30, 41, 59, 0.7)'; // Original glass
             navbar.style.boxShadow = 'none';
+        }
+
+        // Back to Top Visibility
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
         }
     });
 

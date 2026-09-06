@@ -1,23 +1,23 @@
 :root {
-    /* Color Palette */
-    --bg-color: #020617;
-    /* Very Dark Blue */
-    --bg-alt: #0f172a;
-    --text-main: #f8fafc;
-    --text-muted: #cbd5e1;
+    /* Color Palette — tomada del escudo del Colegio Nazareo */
+    --bg-color: #0a1626;
+    /* Azul marino del escudo */
+    --bg-alt: #0f2038;
+    --text-main: #eef5fb;
+    --text-muted: #93aec8;
 
     /* Accents */
-    --accent-primary: #3b82f6;
-    /* Bright Blue from Flyer */
-    --accent-secondary: #facc15;
-    /* Yellow/Gold from Logo */
-    --accent-gradient: linear-gradient(135deg, #facc15, #f59e0b);
-    /* Golden gradient */
+    --accent-primary: #e0b03e;
+    /* Dorado de las columnas del escudo */
+    --accent-secondary: #bfe1f0;
+    /* Celeste de la franja inferior del escudo */
+    --accent-gradient: linear-gradient(135deg, #e0b03e, #f2cf6e);
+    /* Dorado, sin degradado ajeno a la marca */
 
     /* Glassmorphism */
-    --glass-bg: rgba(30, 41, 59, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --glass-bg: rgba(19, 40, 68, 0.7);
+    --glass-border: rgba(238, 245, 251, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
 
     /* Dimensions */
     --nav-height: 80px;
@@ -100,7 +100,7 @@ body {
 }
 
 .btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
     transform: translateY(-2px);
 }
 
@@ -225,7 +225,7 @@ body {
     border: 1px solid rgba(59, 130, 246, 0.4);
     border-radius: 20px;
     font-size: 0.9rem;
-    color: #c4b5fd;
+    color: var(--accent-secondary);
     margin-bottom: 1.5rem;
 }
 
@@ -693,6 +693,91 @@ footer {
     background-color: #0b1120;
     padding: 4rem 2rem 2rem;
     text-align: center;
+}
+
+/* Saludos y Peticiones Form */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem;
+}
+
+.greeting-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+
+.greeting-form .btn-primary {
+    width: fit-content;
+    align-self: center;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
 }
 
 .footer-logo {

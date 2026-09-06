@@ -16,6 +16,8 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="assets/logo.png">
 </head>
 <body>
     <!-- Navigation -->
@@ -31,7 +33,7 @@
                 <li><a href="#equipo">El Equipo</a></li>
                 <li><a href="#clima">Clima</a></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" role="button" tabindex="0" aria-label="Abrir menú de navegación" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
@@ -88,7 +90,7 @@
                         <h3>Historia de Hoy</h3>
                     </div>
                     <div class="card-body" style="padding: 0; overflow: hidden; aspect-ratio: 9/16; width: 100%; height: auto; border-bottom-left-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius); background: #000;">
-                        <img src="assets/historia.jpg" alt="Historia de Instagram" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="assets/historia.jpg" alt="Historia de Instagram del Colegio Nazareo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -248,7 +250,36 @@
         </div>
     </section>
 
+    <!-- Saludos y Peticiones Section -->
+    <section id="saludos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Muro de <span class="gradient-text">Saludos</span></h2>
+                <p>Déjanos tu saludo o pide tu canción favorita para que la pasemos al aire.</p>
+            </div>
+            <div class="form-container glass-card">
+                <form action="https://formspree.io/f/your-id-here" method="POST" class="greeting-form">
+                    <div class="form-group">
+                        <label for="name">Tu Nombre</label>
+                        <input type="text" id="name" name="name" placeholder="Ej. Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tu Saludo o Petición</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar al Aire <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <a href="#home" id="back-to-top" class="back-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
     <!-- Footer -->
+
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -257,10 +288,10 @@
             </div>
             <p>El programa radial del Colegio Nazareo.</p>
             <div class="social-links">
-                <a href="https://open.spotify.com/show/2euOEAlQutCqdzQcsWM5pZ" target="_blank" rel="noopener noreferrer" class="spotify-link" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://open.spotify.com/show/2euOEAlQutCqdzQcsWM5pZ" target="_blank" rel="noopener noreferrer" class="spotify-link" title="Spotify" aria-label="Escúchanos en Spotify"><i class="fa-brands fa-spotify"></i></a>
+                <a href="#" aria-label="Síguenos en Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" aria-label="Síguenos en Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Síguenos en YouTube"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
         <div class="footer-bottom">

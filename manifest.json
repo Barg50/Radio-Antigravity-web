@@ -1,0 +1,16 @@
+{
+  "name": "Radio Nazareo - Desde la punta del cerro y más allá",
+  "short_name": "Radio Nazareo",
+  "description": "Radio escolar del Colegio Nazareo. Transmitiendo en vivo todos los miércoles a las 13:00 hrs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
