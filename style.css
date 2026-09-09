@@ -246,9 +246,18 @@ body {
 .hero-buttons {
     display: flex;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
+#live-play-btn.playing {
+    background: #ef4444;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+#live-play-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
 
 
 .hero-graphics {
@@ -384,6 +393,81 @@ body {
 .card-header i {
     font-size: 1.5rem;
     color: var(--accent-primary);
+}
+
+.media-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Vista compacta del Equipo (dentro de "Transmisión En Vivo") */
+.team-preview-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 1.5rem 0.8rem;
+    padding: 2rem;
+}
+
+.team-preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+}
+
+.team-preview-item .avatar {
+    margin: 0;
+}
+
+.tp-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.tp-role {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.team-preview-link {
+    display: block;
+    text-align: center;
+    padding: 1.2rem;
+    color: var(--accent-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--glass-border);
+    transition: var(--transition);
+}
+
+.team-preview-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+}
+
+/* Reproductor de Radio en Vivo (estado, debajo del botón en el hero) */
+.live-status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.live-status {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.live-status.on-air {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+.live-status.off-air {
+    color: #f87171;
 }
 
 .card-body {
@@ -656,38 +740,6 @@ body {
     line-height: 1.55;
 }
 
-/* Weather Section */
-.weather-widget {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 3rem;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-}
-
-.weather-temp {
-    font-size: 4rem;
-    font-weight: 800;
-    margin: 1.5rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#weather-icon {
-    font-size: 3.5rem;
-    -webkit-text-fill-color: var(--text-main);
-}
-
-#weather-location {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-}
-
 /* Footer */
 footer {
     background-color: #0b1120;
@@ -778,6 +830,32 @@ footer {
 .back-to-top:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+    transition: var(--transition);
+    z-index: 999;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.7);
+    background: #2fe375;
+    color: white;
 }
 
 .footer-logo {
@@ -922,6 +1000,10 @@ footer {
     .hero-buttons {
         justify-content: center;
         flex-wrap: wrap;
+    }
+
+    .live-status-row {
+        justify-content: center;
     }
 
     .hero-graphics {

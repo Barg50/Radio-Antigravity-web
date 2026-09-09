@@ -91,25 +91,80 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Update Copyright Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 5. Weather Widget (Simulated for now, replace with real API call later)
-    // Here we use a placeholder since we don't have the exact city yet.
-    // In a real scenario, you'd use fetch() with an API like OpenWeatherMap.
-    const loadWeather = () => {
-        const locationEl = document.getElementById('weather-location');
-        const tempEl = document.getElementById('temperature');
-        const descEl = document.getElementById('weather-desc');
-        const iconEl = document.getElementById('weather-icon');
+    // 5. Reproductor de Radio en Vivo (stream directo de Listen2MyRadio, sin su página completa)
+    const livePlayBtn = document.getElementById('live-play-btn');
+    const liveAudio = document.getElementById('live-audio');
+    const liveStatus = document.getElementById('live-status');
+    const liveDot = document.getElementById('live-dot');
+    // Proxy HTTPS de Listen2MyRadio hacia el servidor Icecast real (ip/port/mount de la cuenta de Radio Nazareo).
+    // Evita el bloqueo de "contenido mixto" que da un <audio> apuntando directo a un stream http:// desde esta página https.
+    const LIVE_STREAM_URL = 'https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=5151&type=ice&mount=stream';
 
-        // Simulate network delay
-        setTimeout(() => {
-            locationEl.textContent = 'Viña del Mar, Chile'; // Change when city is confirmed
-            tempEl.textContent = '18°C';
-            descEl.textContent = 'Parcialmente nublado';
-            // Update icon classes if needed
-            iconEl.className = 'fa-solid fa-cloud-sun'; 
-        }, 1500);
-    };
+    if (livePlayBtn && liveAudio && liveStatus) {
+        const setStatus = (text, state = '') => {
+            liveStatus.textContent = text;
+            liveStatus.classList.remove('on-air', 'off-air');
+            if (state) liveStatus.classList.add(state);
+            if (liveDot) liveDot.hidden = state !== 'on-air';
+        };
 
-    loadWeather();
+        const showPlayIcon = () => {
+            livePlayBtn.classList.remove('playing');
+            livePlayBtn.innerHTML = '<i class="fa-solid fa-play"></i> Escuchar en Vivo';
+        };
+
+        const showStopIcon = () => {
+            livePlayBtn.classList.add('playing');
+            livePlayBtn.innerHTML = '<i class="fa-solid fa-stop"></i> En Vivo Ahora';
+        };
+
+        const stopStream = () => {
+            liveAudio.pause();
+            liveAudio.removeAttribute('src');
+            liveAudio.load();
+            showPlayIcon();
+        };
+
+        livePlayBtn.addEventListener('click', () => {
+            if (livePlayBtn.classList.contains('playing')) {
+                stopStream();
+                setStatus('Presiona play para escuchar');
+                return;
+            }
+
+            livePlayBtn.disabled = true;
+            setStatus('Conectando...');
+            liveAudio.src = LIVE_STREAM_URL;
+            liveAudio.load();
+            liveAudio.play().catch(() => {
+                // El evento 'error' del audio se encarga de mostrar el mensaje real (ej. fuera del aire)
+            });
+        });
+
+        liveAudio.addEventListener('playing', () => {
+            livePlayBtn.disabled = false;
+            showStopIcon();
+            setStatus('En vivo ahora', 'on-air');
+        });
+
+        liveAudio.addEventListener('error', () => {
+            livePlayBtn.disabled = false;
+            stopStream();
+            setStatus('La radio está fuera del aire. Vuelve el miércoles a las 13:00 hrs.', 'off-air');
+        });
+    }
+
+    // 6. Formulario de Saludos → se envía por WhatsApp (no hay backend propio conectado a este formulario)
+    const greetingForm = document.querySelector('.greeting-form');
+    if (greetingForm) {
+        greetingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const text = `Hola Radio Nazareo! Soy ${name} y quiero enviar este saludo/petición: ${message}`;
+            window.open(`https://wa.me/56993706069?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+            greetingForm.reset();
+        });
+    }
 
 });
