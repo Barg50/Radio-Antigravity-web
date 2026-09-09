@@ -219,7 +219,9 @@ body {
 }
 
 .badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 6px 16px;
     background: rgba(59, 130, 246, 0.2);
     border: 1px solid rgba(59, 130, 246, 0.4);
@@ -227,6 +229,12 @@ body {
     font-size: 0.9rem;
     color: var(--accent-secondary);
     margin-bottom: 1.5rem;
+}
+
+.badge-logo {
+    height: 22px;
+    width: auto;
+    border-radius: 4px;
 }
 
 .hero h1 {
