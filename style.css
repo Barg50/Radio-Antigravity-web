@@ -577,6 +577,81 @@ body {
     filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.45));
 }
 
+/* Episodios Anteriores (lista compacta, sin reproductor incrustado) */
+.episode-list {
+    max-width: 900px;
+    margin: 2.5rem auto 0;
+}
+
+.episode-list-heading {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.episode-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.episode-list-item + .episode-list-item {
+    margin-top: 1rem;
+}
+
+.episode-list-item:hover {
+    border-color: rgba(29, 185, 84, 0.35);
+    background: rgba(30, 41, 59, 0.6);
+}
+
+.episode-list-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1ed760;
+    margin-bottom: 0.3rem;
+}
+
+.episode-list-info h5 {
+    font-size: 1.05rem;
+    color: var(--text-main);
+    margin-bottom: 0.3rem;
+}
+
+.episode-list-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.episode-list-play {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #1DB954;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.episode-list-play:hover {
+    background: #1ed760;
+    transform: scale(1.08);
+}
+
 /* Team Section */
 .team-profesores {
     display: grid;
