@@ -1,170 +1,149 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Smooth Scrolling for Navigation Links
+    // =============================================
+    // MOBILE HAMBURGER MENU
+    // =============================================
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    // Create overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            overlay.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu when clicking a nav link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                overlay.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
+    // =============================================
+    // SMOOTH SCROLLING for anchor links
+    // =============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                // Adjust scroll position considering the fixed navbar
-                const navHeight = document.querySelector('.navbar').offsetHeight;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-  
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
-
-                // Close mobile menu on navigation
-                const navLinksContainer = document.querySelector('.nav-links');
-                if (navLinksContainer) {
-                    navLinksContainer.classList.remove('active');
-                }
             }
         });
     });
 
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu');
-    const navLinksContainer = document.querySelector('.nav-links');
-    if (mobileMenuBtn && navLinksContainer) {
-        const toggleMenu = () => {
-            const isOpen = navLinksContainer.classList.toggle('active');
-            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-        };
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-        mobileMenuBtn.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleMenu();
-            }
-        });
-    }
+    // =============================================
+    // CONTACT FORM → WhatsApp
+    // =============================================
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('form-nombre')?.value || '';
+            const telefono = document.getElementById('form-telefono')?.value || '';
+            const servicio = document.getElementById('form-servicio')?.value || '';
+            const mensaje = document.getElementById('form-mensaje')?.value || '';
 
-    // 2. Active Link Highlighting on Scroll
-    const sections = document.querySelectorAll('section, header');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            // Add offset for the navbar
-            if (pageYOffset >= (sectionTop - 100)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-    // 3. Navbar Background Effect on Scroll
-    const navbar = document.querySelector('.navbar');
-    const backToTopBtn = document.getElementById('back-to-top');
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(15, 23, 42, 0.9)'; // Darker slate
-            navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
-        } else {
-            navbar.style.background = 'rgba(30, 41, 59, 0.7)'; // Original glass
-            navbar.style.boxShadow = 'none';
-        }
-
-        // Back to Top Visibility
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-    });
-
-    // 4. Update Copyright Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 5. Reproductor de Radio en Vivo (stream directo de Listen2MyRadio, sin su página completa)
-    const livePlayBtn = document.getElementById('live-play-btn');
-    const liveAudio = document.getElementById('live-audio');
-    const liveStatus = document.getElementById('live-status');
-    const liveDot = document.getElementById('live-dot');
-    // Proxy HTTPS de Listen2MyRadio hacia el servidor Icecast real (ip/port/mount de la cuenta de Radio Nazareo).
-    // Evita el bloqueo de "contenido mixto" que da un <audio> apuntando directo a un stream http:// desde esta página https.
-    const LIVE_STREAM_URL = 'https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=5151&type=ice&mount=stream';
-
-    if (livePlayBtn && liveAudio && liveStatus) {
-        const setStatus = (text, state = '') => {
-            liveStatus.textContent = text;
-            liveStatus.classList.remove('on-air', 'off-air');
-            if (state) liveStatus.classList.add(state);
-            if (liveDot) liveDot.hidden = state !== 'on-air';
-        };
-
-        const showPlayIcon = () => {
-            livePlayBtn.classList.remove('playing');
-            livePlayBtn.innerHTML = '<i class="fa-solid fa-play"></i> Escuchar en Vivo';
-        };
-
-        const showStopIcon = () => {
-            livePlayBtn.classList.add('playing');
-            livePlayBtn.innerHTML = '<i class="fa-solid fa-stop"></i> En Vivo Ahora';
-        };
-
-        const stopStream = () => {
-            liveAudio.pause();
-            liveAudio.removeAttribute('src');
-            liveAudio.load();
-            showPlayIcon();
-        };
-
-        livePlayBtn.addEventListener('click', () => {
-            if (livePlayBtn.classList.contains('playing')) {
-                stopStream();
-                setStatus('Presiona play para escuchar');
+            if (!nombre || !telefono) {
+                alert('Por favor, completa tu nombre y teléfono para poder contactarte.');
                 return;
             }
 
-            livePlayBtn.disabled = true;
-            setStatus('Conectando...');
-            liveAudio.src = LIVE_STREAM_URL;
-            liveAudio.load();
-            liveAudio.play().catch(() => {
-                // El evento 'error' del audio se encarga de mostrar el mensaje real (ej. fuera del aire)
-            });
-        });
+            // Build formatted WhatsApp message
+            let textoWhatsapp = `Hola, me comunico con el centro audiológico BeopenSound. Me gustaría recibir orientación sobre sus servicios y agendar una hora, por favor.%0A%0A*Datos del Paciente:*%0A👤 Nombre: ${nombre}%0A📞 Teléfono: ${telefono}`;
+            
+            if (servicio) {
+                textoWhatsapp += `%0A🔧 Servicio: ${servicio}`;
+            }
+            if (mensaje) {
+                textoWhatsapp += `%0A💬 Consulta: ${mensaje}`;
+            }
 
-        liveAudio.addEventListener('playing', () => {
-            livePlayBtn.disabled = false;
-            showStopIcon();
-            setStatus('En vivo ahora', 'on-air');
-        });
+            // Redirect to WhatsApp
+            const url = `https://wa.me/56971372348?text=${textoWhatsapp}`;
+            window.open(url, '_blank');
 
-        liveAudio.addEventListener('error', () => {
-            livePlayBtn.disabled = false;
-            stopStream();
-            setStatus('La radio está fuera del aire. Vuelve el miércoles a las 13:00 hrs.', 'off-air');
-        });
-    }
-
-    // 6. Formulario de Saludos → se envía por WhatsApp (no hay backend propio conectado a este formulario)
-    const greetingForm = document.querySelector('.greeting-form');
-    if (greetingForm) {
-        greetingForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const message = document.getElementById('message').value.trim();
-            const text = `Hola Radio Nazareo! Soy ${name} y quiero enviar este saludo/petición: ${message}`;
-            window.open(`https://wa.me/56993706069?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
-            greetingForm.reset();
+            // Visual feedback
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            if (submitBtn) {
+                submitBtn.textContent = '¡Redirigiendo a WhatsApp!';
+                submitBtn.style.backgroundColor = '#25d366';
+                submitBtn.style.color = '#fff';
+                setTimeout(() => {
+                    contactForm.reset();
+                    submitBtn.textContent = 'Solicitar Atención por WhatsApp';
+                    submitBtn.style.backgroundColor = '';
+                    submitBtn.style.color = '';
+                }, 3000);
+            }
         });
     }
 
+    // =============================================
+    // CONTACT FORM PAGE → Dual Actions (WhatsApp/Email)
+    // =============================================
+    const btnWspContact = document.getElementById('btn-wsp-contact');
+    const contactFormPage = document.getElementById('contactFormPage');
+
+    if (btnWspContact && contactFormPage) {
+        btnWspContact.addEventListener('click', (e) => {
+            // Check HTML5 validation first
+            if (!contactFormPage.checkValidity()) {
+                contactFormPage.reportValidity();
+                return;
+            }
+
+            const nombre = document.getElementById('name')?.value || '';
+            const email = document.getElementById('email')?.value || '';
+            const telefono = document.getElementById('telefono')?.value || '';
+            const servicio = document.getElementById('service')?.value || '';
+            const mensaje = document.getElementById('message')?.value || '';
+
+            // Build formatted WhatsApp message
+            let textoWhatsapp = `Hola, me comunico con el centro audiológico BeopenSound. Me gustaría contactarme por el siguiente motivo:%0A%0A*Datos del Paciente:*%0A👤 Nombre: ${nombre}%0A✉️ Correo: ${email}%0A📞 Teléfono: ${telefono}`;
+            
+            if (servicio) {
+                textoWhatsapp += `%0A🔧 Servicio: ${servicio}`;
+            }
+            if (mensaje) {
+                textoWhatsapp += `%0A💬 Consulta: ${mensaje}`;
+            }
+
+            // Redirect to WhatsApp
+            const url = `https://wa.me/56971372348?text=${textoWhatsapp}`;
+            window.open(url, '_blank');
+
+            // Visual feedback
+            btnWspContact.innerHTML = '<i class="fab fa-whatsapp"></i> ¡Redirigiendo!';
+            setTimeout(() => {
+                contactFormPage.reset();
+                btnWspContact.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar por WhatsApp';
+            }, 3000);
+        });
+    }
 });

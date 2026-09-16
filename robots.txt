@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://beopensound.cl/sitemap.xml
