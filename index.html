@@ -1,432 +1,368 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audífonos Clínicos en Viña del Mar | BeopenSound</title>
-    <meta name="description" content="Audífonos clínicos en Viña del Mar con adaptación personalizada y seguimiento profesional por fonoaudiólogos. Audiometría clínica y calibración multimarca. Agenda tu hora.">
-    <meta name="keywords" content="audífonos Viña del Mar, audífonos clínicos, centro auditivo Viña del Mar, audiometría, calibración audífonos, fonoaudiólogo Viña del Mar, BeopenSound">
-    <link rel="canonical" href="https://beopensound.cl/">
+    <title>Radio Nazareo | Desde la Punta del Cerro y Más Allá</title>
+    <meta name="description" content="Radio escolar del Colegio Nazareo. Transmitiendo en vivo todos los miércoles a las 13:00 hrs.">
 
-    <!-- Google Site Verification (migrada de la web antigua) -->
-    <meta name="google-site-verification" content="9OjDGP-gnfVsatvfLEfTZjWdrynzlI03qJ9faKZddsc">
-
-    <!-- Open Graph / Redes Sociales -->
-    <meta property="og:title" content="Audífonos Clínicos en Viña del Mar | BeopenSound">
-    <meta property="og:description" content="Adaptación de audífonos clínicos, audiometría y calibración multimarca. Atención profesional personalizada en Viña del Mar.">
+    <!-- Open Graph (vista previa en WhatsApp, Facebook, etc.) -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://beopensound.cl/">
-    <meta property="og:image" content="https://beopensound.cl/images/logo.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://radionazareo.vercel.app/">
+    <meta property="og:site_name" content="Radio Nazareo">
+    <meta property="og:title" content="Radio Nazareo | Desde la Punta del Cerro y Más Allá">
+    <meta property="og:description" content="Radio escolar del Colegio Nazareo. Transmitiendo en vivo todos los miércoles a las 13:00 hrs.">
+    <meta property="og:image" content="https://radionazareo.vercel.app/assets/logo-radio.png">
     <meta property="og:locale" content="es_CL">
-    <meta property="og:site_name" content="BeopenSound">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Audífonos Clínicos en Viña del Mar | BeopenSound">
-    <meta name="twitter:description" content="Adaptación de audífonos clínicos, audiometría y calibración multimarca en Viña del Mar.">
-    <meta name="twitter:image" content="https://beopensound.cl/images/logo.png">
+    <meta name="twitter:title" content="Radio Nazareo | Desde la Punta del Cerro y Más Allá">
+    <meta name="twitter:description" content="Radio escolar del Colegio Nazareo. Transmitiendo en vivo todos los miércoles a las 13:00 hrs.">
+    <meta name="twitter:image" content="https://radionazareo.vercel.app/assets/logo-radio.png">
 
-    <!-- Preconnect para rendimiento -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="assets/logo.png">
 
-    <!-- Schema.org JSON-LD: WebSite -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "BeopenSound",
-      "url": "https://beopensound.cl",
-      "description": "Centro auditivo especializado en Viña del Mar. Audiometría, audífonos, lavado de oídos y calibración.",
-      "inLanguage": "es"
-    }
-    </script>
-
-    <!-- Schema.org JSON-LD: MedicalClinic + Person -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MedicalClinic",
-      "name": "BeopenSound",
-      "alternateName": "Centro Auditivo BeopenSound",
-      "image": "https://beopensound.cl/images/logo.png",
-      "logo": "https://beopensound.cl/images/logo.png",
-      "url": "https://beopensound.cl",
-      "telephone": "+56971372348",
-      "email": "contacto.beopensound@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Arlegui 160, Edificio Lautaro Oficina 101",
-        "addressLocality": "Viña del Mar",
-        "addressRegion": "Valparaíso",
-        "postalCode": "2571464",
-        "addressCountry": "CL"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -33.0232533,
-        "longitude": -71.5546287
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Viña del Mar"
-      },
-      "medicalSpecialty": "Audiology",
-      "priceRange": "$$",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "20:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Saturday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        }
-      ],
-      "availableService": [
-        {"@type": "MedicalTest", "name": "Audiometría Clínica", "url": "https://beopensound.cl/audiometria"},
-        {"@type": "MedicalProcedure", "name": "Adaptación de Audífonos", "url": "https://beopensound.cl/audifonos"},
-        {"@type": "MedicalProcedure", "name": "Lavado de Oídos", "url": "https://beopensound.cl/lavado-de-oidos"},
-        {"@type": "MedicalProcedure", "name": "Calibración de Audífonos", "url": "https://beopensound.cl/calibracion-de-audifonos"}
-      ],
-      "description": "Centro fonoaudiológico especializado en evaluación auditiva, adaptación de audífonos clínicos, audiometría, lavado de oídos y calibración en Viña del Mar.",
-      "brand": [
-        {"@type": "Brand", "name": "Interton GN"},
-        {"@type": "Brand", "name": "Danavox GN"},
-        {"@type": "Brand", "name": "Audio Service"}
-      ],
-      "employee": {
-        "@type": "Person",
-        "name": "Benjamín Rojas G.",
-        "jobTitle": "Fonoaudiólogo",
-        "description": "Fonoaudiólogo con experiencia en evaluación audiológica y adaptación de soluciones auditivas"
-      },
-      "sameAs": [
-        "https://www.facebook.com/beopensound",
-        "https://www.instagram.com/beopensound"
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "286"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": {"@type": "Person", "name": "María Caro"},
-          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-          "reviewBody": "Muy buena la atención, es muy amable. Mi abuelito quedó muy feliz porque volvió a escuchar bien. Muchas gracias por su amabilidad y ayuda, recomiendo."
-        },
-        {
-          "@type": "Review",
-          "author": {"@type": "Person", "name": "Constanza Pino"},
-          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-          "reviewBody": "Excelente atención! Muy profesional tanto el trato como el procedimiento. Fui por un lavado de oídos, tenía mucha molestia y se solucionó en minutos. Sin duda lo recomendaré."
-        },
-        {
-          "@type": "Review",
-          "author": {"@type": "Person", "name": "yaritza aranda"},
-          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-          "reviewBody": "Muy buena atención, amable y preocupado por el proceso de adaptación de mi abuelo. Lo recomiendo 100%, muy buen profesional."
-        },
-        {
-          "@type": "Review",
-          "author": {"@type": "Person", "name": "Melissa Natera"},
-          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-          "reviewBody": "Excelente. Me salvaron el audífono de mi madre. Buena atención. Súper buena disposición."
-        }
-      ]
-    }
-    </script>
-
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-216F2JNQCT"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-216F2JNQCT');
-    </script>
-    <!-- Vercel Web Analytics -->
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
+    <!-- Vercel Web Analytics (versión para HTML plano, sin build/npm — el import de Next.js no aplica acá) -->
     <script defer src="/_vercel/insights/script.js"></script>
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-
 <body>
-    <header class="navbar" id="navbar">
-        <a href="/" class="logo" aria-label="BeopenSound - Inicio">
-            <img src="images/logo.png" alt="Logo BeopenSound Centro Auditivo" class="logo-img" width="40" height="40">
-            <div class="logo-text">
-                <span class="logo-be">Beopen</span><span class="logo-sound">Sound</span>
+    <!-- Navigation -->
+    <nav class="navbar glass-effect">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="assets/logo-radio.png" alt="Radio Nazareo" style="height: 40px;">
+                <span>Radio Nazareo</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#en-vivo" class="active">En Vivo</a></li>
+                <li><a href="#episodios">Episodios</a></li>
+                <li><a href="#equipo">El Equipo</a></li>
+            </ul>
+            <div class="mobile-menu" role="button" tabindex="0" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
             </div>
-        </a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <nav class="nav-links" id="navLinks" role="navigation" aria-label="Navegación principal">
-            <a href="/">Inicio</a>
-            <a href="/audifonos">Audífonos</a>
-            <a href="/audiometria">Audiometría</a>
-            <a href="/lavado-de-oidos">Lavado de Oídos</a>
-            <a href="/calibracion-de-audifonos">Calibración</a>
-            <a href="/nosotros">Nosotros</a>
-            <a href="/preguntas-frecuentes">FAQ</a>
-            <a href="/contacto">Contacto</a>
-        </nav>
-        <a href="https://wa.me/56971372348?text=Hola,%20me%20comunico%20con%20el%20centro%20audiológico%20BeopenSound.%20Me%20gustaría%20recibir%20orientación%20sobre%20sus%20servicios%20y%20agendar%20una%20hora,%20por%20favor." class="btn-primary btn-nav-cta" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click_whatsapp', {'event_category': 'Contacto', 'event_label': 'Boton WhatsApp'});">Agendar Atención</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <span class="badge"><img src="assets/logo.png" alt="" class="badge-logo"> 🎙️ Colegio Nazareo</span>
+            <h1>Desde la punta del cerro <span class="gradient-text">y más allá</span></h1>
+            <p class="subtitle">Acompáñanos todos los <strong>Miércoles a las 13:00 hrs</strong>. ¡Sintoniza nuestra energía escolar!</p>
+            <div class="hero-buttons">
+                <!-- Este botón ES el reproductor en vivo (stream directo vía proxy HTTPS de Listen2MyRadio) -->
+                <button id="live-play-btn" class="btn btn-primary" type="button" aria-label="Reproducir Radio Nazareo en vivo">
+                    <i class="fa-solid fa-play"></i> Escuchar en Vivo
+                </button>
+                <a href="#episodios" class="btn btn-spotify"><i class="fa-brands fa-spotify"></i> Escuchar Podcast</a>
+            </div>
+            <div class="live-status-row">
+                <span id="live-dot" class="live-indicator" hidden></span>
+                <p id="live-status" class="live-status">Presiona play para escuchar</p>
+            </div>
+            <audio id="live-audio" preload="none"></audio>
+
+        </div>
+        <div class="hero-graphics">
+            <!-- Decorative elements -->
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="sound-wave">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+        </div>
     </header>
 
-    <main>
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Audífonos clínicos <span class="highlight">que se adaptan a ti</span></h1>
-                <p class="hero-subtitle">Centro Auditivo especializado en Viña del Mar</p>
-                <p>En BeopenSound adaptamos audífonos de última generación con seguimiento profesional personalizado, además de audiometría, lavado de oídos y calibración — todo con fonoaudiólogos certificados en Viña del Mar.</p>
-                <div class="hero-buttons">
-                    <a href="https://wa.me/56971372348?text=Hola,%20me%20comunico%20con%20el%20centro%20audiológico%20BeopenSound.%20Me%20gustaría%20recibir%20orientación%20sobre%20sus%20servicios%20y%20agendar%20una%20hora,%20por%20favor." class="btn-primary large" target="_blank" rel="noopener noreferrer" id="cta-hero-principal" onclick="gtag('event', 'click_whatsapp', {'event_category': 'Contacto', 'event_label': 'Boton WhatsApp'});">Agenda tu Evaluación Auditiva</a>
-                    <a href="#servicios" class="btn-secondary">Conoce nuestros servicios</a>
+    <!-- En Vivo Section -->
+    <section id="en-vivo" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transmisión <span class="gradient-text">En Vivo</span> <span class="live-indicator"></span></h2>
+                <p>Escúchanos en directo. ¡No te pierdas ningún programa!</p>
+            </div>
+            
+            <div class="media-grid">
+
+                <!-- Instagram Story -->
+                <div class="media-card glass-card" style="max-width: 400px; margin: 0 auto; width: 100%;">
+                    <div class="card-header">
+                        <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+                        <h3>Historia de Hoy</h3>
+                    </div>
+                    <div class="card-body" style="padding: 0; overflow: hidden; aspect-ratio: 9/16; width: 100%; height: auto; border-bottom-left-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius); background: #000;">
+                        <img src="assets/historia.jpg" alt="Historia de Instagram del Colegio Nazareo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+
+                <!-- Equipo (vista compacta) -->
+                <div class="media-card glass-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-users" style="color: var(--accent-secondary);"></i>
+                        <h3>Nuestro Equipo</h3>
+                    </div>
+                    <div class="team-preview-grid">
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-glow"><i class="fa-solid fa-sliders"></i></div>
+                            <span class="tp-name">Tío Benja</span>
+                            <span class="tp-role">Conducción & Técnica</span>
+                        </div>
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-glow"><i class="fa-solid fa-chalkboard-user"></i></div>
+                            <span class="tp-name">Tía Gabi</span>
+                            <span class="tp-role">Profesora & Locutora</span>
+                        </div>
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-student"><i class="fa-solid fa-star"></i></div>
+                            <span class="tp-name">Victoria Rojas</span>
+                            <span class="tp-role">Panel Estudiantil</span>
+                        </div>
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-student"><i class="fa-solid fa-microphone-lines"></i></div>
+                            <span class="tp-name">Dakari Caviedes</span>
+                            <span class="tp-role">Panel Estudiantil</span>
+                        </div>
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-student"><i class="fa-solid fa-lightbulb"></i></div>
+                            <span class="tp-name">Fernanda Suárez</span>
+                            <span class="tp-role">Panel Estudiantil</span>
+                        </div>
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-student"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                            <span class="tp-name">Ahinoa Gómez</span>
+                            <span class="tp-role">Panel Estudiantil</span>
+                        </div>
+                        <div class="team-preview-item">
+                            <div class="avatar avatar-student"><i class="fa-solid fa-face-laugh-beam"></i></div>
+                            <span class="tp-name">Nicol Del Valle</span>
+                            <span class="tp-role">Panel Estudiantil</span>
+                        </div>
+                    </div>
+                    <a href="#equipo" class="team-preview-link">Conocer a todo el equipo <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="hero-img-wrapper">
-                <img src="images/centro.jpg" alt="Centro Auditivo BeopenSound en Viña del Mar" class="hero-img" width="600" height="400" loading="lazy">
-            </div>
         </div>
     </section>
 
-    <section class="social-proof">
-        <h2>Lo que dicen nuestros pacientes</h2>
-        <div class="stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        </div>
-        <p><strong>5.0/5</strong> basado en <strong>286 opiniones en Google</strong> de pacientes reales.</p>
+    <!-- Episodios Section -->
+    <section id="episodios" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>Podcast & <span class="gradient-text">Episodios</span></h2>
+                <p>Revive las grabaciones y programas oficiales en Spotify cuando tú quieras.</p>
+            </div>
 
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="review-text">"Muy buena la atención, es muy amable. Mi abuelito quedó muy feliz porque volvió a escuchar bien. Muchas gracias por su amabilidad y ayuda, recomiendo 💯."</p>
-                <p class="review-author">María Caro <span>· Reseña en Google</span></p>
-            </div>
-            <div class="review-card">
-                <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="review-text">"Excelente atención! Muy profesional tanto el trato como el procedimiento. Fui por un lavado de oídos, tenía mucha molestia y se solucionó en minutos. Sin duda lo recomendaré."</p>
-                <p class="review-author">Constanza Pino <span>· Reseña en Google</span></p>
-            </div>
-            <div class="review-card">
-                <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="review-text">"Muy buena atención, amable y preocupado por el proceso de adaptación de mi abuelo. Lo recomiendo 100%, muy buen profesional."</p>
-                <p class="review-author">yaritza aranda <span>· Reseña en Google</span></p>
-            </div>
-            <div class="review-card">
-                <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="review-text">"Excelente. Me salvaron el audífono de mi madre. Buena atención. Súper buena disposición."</p>
-                <p class="review-author">Melissa Natera <span>· Reseña en Google</span></p>
-            </div>
-        </div>
-
-        <a href="https://maps.app.goo.gl/MetQZS2soYKhx2EDA" target="_blank" rel="noopener noreferrer" class="reviews-cta">Ver todas las opiniones en Google</a>
-    </section>
-
-    <section class="marcas">
-        <p>Respaldados por tecnología líder a nivel mundial:</p>
-        <div class="marcas-logos">
-            <div class="marca-item">Interton GN</div>
-            <div class="marca-item">Danavox GN</div>
-            <div class="marca-item">Audio Service</div>
-        </div>
-    </section>
-
-    <section id="sintomas" class="dolores">
-        <h2>¿Te sientes identificado con alguna de estas situaciones?</h2>
-        <div class="cards-container">
-            <div class="card">
-                <div class="icon"><i class="fas fa-users"></i></div>
-                <h3>Conversaciones Borrosas</h3>
-                <p>Escuchas que te hablan, pero te cuesta entender las palabras, especialmente en ambientes ruidosos o
-                    reuniones familiares.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-tv"></i></div>
-                <h3>Volumen Alto en la TV</h3>
-                <p>Tus familiares te piden constantemente que bajes el volumen del televisor o la radio porque está
-                    demasiado alto para ellos.</p>
-            </div>
-            <div class="card">
-                <div class="icon"><i class="fas fa-redo"></i></div>
-                <h3>Pides que te repitan</h3>
-                <p>Te encuentras diciendo "¿qué?" con frecuencia y sientes fatiga al final del día por el esfuerzo de
-                    intentar escuchar.</p>
-            </div>
-        </div>
-        <div class="cta-banner">
-            <p>No tienes que acostumbrarte al silencio. El primer paso es una evaluación profesional.</p>
-            <a href="https://wa.me/56971372348?text=Hola,%20me%20comunico%20con%20el%20centro%20audiológico%20BeopenSound.%20Me%20gustaría%20agendar%20una%20evaluación%20auditiva,%20por%20favor." class="btn-primary" target="_blank" rel="noopener noreferrer" id="cta-evaluacion" onclick="gtag('event', 'click_whatsapp', {'event_category': 'Contacto', 'event_label': 'Boton WhatsApp'});">Agendar evaluación auditiva</a>
-        </div>
-    </section>
-
-    <section id="servicios" class="soluciones">
-        <h2>Nuestros Servicios Especializados</h2>
-        <p class="subtitle">Más que servicios, te ofrecemos un camino claro hacia una mejor calidad de vida.</p>
-
-        <div class="soluciones-grid">
-            <a href="/audifonos" class="solucion-item solucion-link">
-                <div class="solucion-img placeholder-audifonos" role="img" aria-label="Audífonos clínicos de alta tecnología en BeopenSound"></div>
-                <div class="solucion-content">
-                    <h3>Audífonos Clínicos de Alta Tecnología</h3>
-                    <p>Adaptación personalizada de audífonos de última generación con un enfoque profesional e integral y seguimiento continuo para garantizar tu comodidad.</p>
-                    <span class="solucion-cta">Conocer más →</span>
+            <div class="episodes-container glass-card">
+                <div class="episode-details">
+                    <div class="episode-tag">
+                        <span class="badge-spotify"><i class="fa-brands fa-spotify"></i> Episodio 2 · Ya Disponible</span>
+                    </div>
+                    <h3 class="episode-title">Juntos Somos Más Fuertes</h3>
+                    <p class="episode-subtitle">Desde la punta del cerro y más allá · Colegio Nazareo</p>
+                    <p class="episode-desc">
+                        Segundo episodio de nuestro programa, con entrevista a nuestro director Richard Silva.
+                    </p>
+                    <div class="episode-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~27 mins</span>
+                        <span><i class="fa-solid fa-calendar-days"></i> Septiembre 2026</span>
+                        <span><i class="fa-solid fa-microphone"></i> Colegio Nazareo</span>
+                    </div>
+                    <div class="episode-actions" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <a href="https://open.spotify.com/episode/7vTs20v0BSK3Wq3Jv5lpl8" target="_blank" rel="noopener noreferrer" class="btn btn-spotify">
+                            <i class="fa-brands fa-spotify"></i> Abrir en Spotify
+                        </a>
+                        <a href="https://open.spotify.com/show/2euOEAlQutCqdzQcsWM5pZ" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="border-radius: 30px;">
+                            <i class="fa-solid fa-podcast"></i> Ver Canal Completo
+                        </a>
+                    </div>
                 </div>
-            </a>
-            <a href="/audiometria" class="solucion-item reverse solucion-link">
-                <div class="solucion-img placeholder-audiometria" role="img" aria-label="Audiometría clínica profesional"></div>
-                <div class="solucion-content">
-                    <h3>Audiometría Clínica Precisa</h3>
-                    <p>Evaluamos tu capacidad auditiva con equipos calibrados y tecnología clínica avanzada para brindar un diagnóstico preciso y un plan a tu medida.</p>
-                    <span class="solucion-cta">Conocer más →</span>
+
+                <div class="episode-player">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px; width: 100%;" src="https://open.spotify.com/embed/episode/7vTs20v0BSK3Wq3Jv5lpl8?utm_source=generator&si=3b88317bb1a9424d" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
-            </a>
-            <a href="/lavado-de-oidos" class="solucion-item solucion-link">
-                <div class="solucion-img placeholder-lavado" role="img" aria-label="Lavado de oídos profesional"></div>
-                <div class="solucion-content">
-                    <h3>Lavado de Oídos Profesional</h3>
-                    <p>Procedimiento seguro realizado por fonoaudiólogos expertos. Atendemos la acumulación de cerumen que puede estar afectando tu audición o generando molestias. <strong>$25.000 en ambos oídos</strong>, con consulta y otoscopia incluidas.</p>
-                    <span class="solucion-cta">Ver precio y qué incluye →</span>
+            </div>
+
+            <!-- Episodios anteriores -->
+            <div class="episode-list">
+                <h4 class="episode-list-heading">Episodios Anteriores</h4>
+                <div class="episode-list-item">
+                    <div class="episode-list-info">
+                        <span class="episode-list-tag">Episodio 1</span>
+                        <h5>La Libertad en Cristo y las Fiestas Patrias</h5>
+                        <span class="episode-list-date"><i class="fa-solid fa-clock"></i> ~25 mins · Septiembre 2026</span>
+                    </div>
+                    <a href="https://open.spotify.com/episode/38zYogkpTJcXTriw7x8Rn8" target="_blank" rel="noopener noreferrer" class="episode-list-play" aria-label="Escuchar Episodio 1 en Spotify">
+                        <i class="fa-solid fa-play"></i>
+                    </a>
                 </div>
-            </a>
-            <a href="/calibracion-de-audifonos" class="solucion-item reverse solucion-link">
-                <div class="solucion-img placeholder-calibracion" role="img" aria-label="Calibración y mantención de audífonos"></div>
-                <div class="solucion-content">
-                    <h3>Calibración y Mantención Multimarca</h3>
-                    <p>Optimizamos el rendimiento de tus audífonos actuales mediante software clínico para que vuelvas a escuchar con claridad. Consulta la factibilidad y compatibilidad de tu equipo con nosotros.</p>
-                    <span class="solucion-cta">Conocer más →</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipo Section -->
+    <section id="equipo" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro <span class="gradient-text">Equipo</span></h2>
+                <p>Las voces detrás del micrófono del Colegio Nazareo.</p>
+            </div>
+            
+            <!-- Profesores / Conducción -->
+            <div class="team-profesores">
+                <div class="team-card glass-card pro-card">
+                    <div class="avatar avatar-glow"><i class="fa-solid fa-sliders"></i></div>
+                    <span class="role-badge"><i class="fa-solid fa-microphone-lines"></i> Conducción & Técnica</span>
+                    <h3>Tío Benja</h3>
+                    <p class="role">Fonoaudiólogo & Conductor</p>
+                    <p class="pro-bio">
+                        Voz ancla y coordinador de la radio. Modera las conversaciones en cabina, orienta al equipo y está al mando de las perillas y controles técnicos para que cada emisión suene impecable.
+                    </p>
                 </div>
-            </a>
+                <div class="team-card glass-card pro-card">
+                    <div class="avatar avatar-glow"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <span class="role-badge"><i class="fa-solid fa-bolt"></i> Dinamismo & Conducción</span>
+                    <h3>Tía Gabi</h3>
+                    <p class="role">Profesora & Locutora</p>
+                    <p class="pro-bio">
+                        Co-conductora del programa. Con su estilo joven, alegre y dinámico, contagia entusiasmo, anima cada debate y llena el estudio de vitalidad y buena energía.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Panel Estudiantil -->
+            <div class="team-subheading">
+                <span class="badge"><i class="fa-solid fa-users"></i> Panel Estudiantil</span>
+                <h3>Nuestras 5 Voces Jóvenes</h3>
+                <p>El corazón y la energía escolar que llena de vida cada programa.</p>
+            </div>
+
+            <div class="students-grid">
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-heart"></i> Alegre & Cooperadora</span>
+                    <h3>Victoria Rojas</h3>
+                    <p class="student-bio">
+                        Llena de energía positiva y siempre dispuesta a sumar en equipo. Su alegría ilumina la cabina y contagia entusiasmo a oyentes y compañeros.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-award"></i> Respetuoso & Carismático</span>
+                    <h3>Dakari Caviedes</h3>
+                    <p class="student-bio">
+                        Dueño de un carisma natural y un trato siempre respetuoso. Su serenidad y cercanía generan conversaciones amenas e inspiradoras en cabina.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-bolt"></i> Inteligente & Animosa</span>
+                    <h3>Fernanda Suárez</h3>
+                    <p class="student-bio">
+                        Agudeza mental y espíritu siempre despierto. Aporta opiniones claras, reflexiones enriquecedoras y un impulso constante a cada emisión.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-sun"></i> Alegre & Comprensiva</span>
+                    <h3>Ahinoa Gómez</h3>
+                    <p class="student-bio">
+                        Destaca por su empatía y calidez humana. Su capacidad para escuchar y comprender a los demás crea una atmósfera acogedora frente al micrófono.
+                    </p>
+                </div>
+
+                <div class="student-card glass-card">
+                    <div class="avatar avatar-student">
+                        <i class="fa-solid fa-face-laugh-beam"></i>
+                    </div>
+                    <span class="student-pill"><i class="fa-solid fa-masks-theater"></i> Cómica & Agradable</span>
+                    <h3>Nicol Del Valle</h3>
+                    <p class="student-bio">
+                        La chispa humorística y agradable del programa. Con su simpatía y espontaneidad saca sonrisas en el estudio y hace cada episodio inolvidable.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="especialistas" class="autoridad">
-        <div class="autoridad-container">
-            <div class="autoridad-img-wrapper">
-                <img src="images/profesional.jpg" alt="Benjamín Rojas G., Fonoaudiólogo especialista en BeopenSound" class="autoridad-img" width="600" height="400" loading="lazy">
+    <!-- Saludos y Peticiones Section -->
+    <section id="saludos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Muro de <span class="gradient-text">Saludos</span></h2>
+                <p>Déjanos tu saludo o pide tu canción favorita para que la pasemos al aire.</p>
             </div>
-            <div class="autoridad-content">
-                <h2>Confianza y Excelencia Profesional</h2>
-                <p>En BeopenSound, no somos solo una tienda de audífonos; somos un centro fonoaudiológico especializado.
-                    Nos diferenciamos de grandes cadenas por nuestra atención humana, dedicada y basada en la evidencia
-                    clínica.</p>
-                <ul class="beneficios-lista">
-                    <li><i class="fas fa-check-circle"></i> Benjamín Rojas G., Fonoaudiólogo con experiencia en evaluación audiológica.</li>
-                    <li><i class="fas fa-check-circle"></i> Equipamiento Clínico de Vanguardia.</li>
-                    <li><i class="fas fa-check-circle"></i> Seguimiento y calibración personalizada constante.</li>
-                    <li><i class="fas fa-check-circle"></i> Atención cercana y personalizada, orientada a las necesidades auditivas de cada persona.</li>
-                </ul>
-                <a href="/nosotros" class="btn-primary" style="margin-top: 1.5rem;">Conoce nuestro equipo</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Banner GES/Fonasa -->
-    <section class="ges-banner">
-        <div class="ges-content">
-            <i class="fas fa-file-invoice-dollar"></i>
-            <div class="ges-text">
-                <h3>Asesoría Reembolso GES / Fonasa</h3>
-                <p>Te orientamos y acompañamos paso a paso en todo el proceso de trámites y reembolsos para la adquisición de tus audífonos a través de Fonasa.</p>
+            <div class="form-container glass-card">
+                <!-- Se envía por WhatsApp (ver script.js) porque no hay backend propio conectado a este formulario -->
+                <form class="greeting-form">
+                    <div class="form-group">
+                        <label for="name">Tu Nombre</label>
+                        <input type="text" id="name" name="name" placeholder="Ej. Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tu Saludo o Petición</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar al Aire <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="contacto">
-        <h2>Da el primer paso hoy</h2>
-        <p>Completa el formulario y te contactaremos por WhatsApp para coordinar tu atención.</p>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <input type="text" id="form-nombre" placeholder="Tu Nombre Completo" aria-label="Tu Nombre Completo" required>
-            </div>
-            <div class="form-group">
-                <input type="tel" id="form-telefono" placeholder="Tu Teléfono (ej: +56 9 ...)" aria-label="Tu Teléfono" required>
-            </div>
-            <div class="form-group">
-                <select id="form-servicio" aria-label="¿Qué servicio te interesa?" required>
-                    <option value="" disabled selected>¿Qué servicio te interesa?</option>
-                    <option value="Audífonos">Audífonos</option>
-                    <option value="Audiometría">Audiometría</option>
-                    <option value="Lavado de Oídos">Lavado de Oídos</option>
-                    <option value="Calibración">Calibración de Audífonos</option>
-                    <option value="Consulta General">Consulta General</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <textarea id="form-mensaje"
-                    placeholder="Cuéntanos brevemente tu situación (opcional)"
-                    aria-label="Mensaje opcional"
-                    rows="3"></textarea>
-            </div>
-            <div class="form-group consent-group" style="margin-bottom: 1.5rem; font-size: 0.85rem; color: #555; text-align: left;">
-                <p style="margin: 0;">Al enviar este formulario, autorizo el tratamiento de mis datos para gestionar mi solicitud de contacto, según la <a href="/politica-de-privacidad" target="_blank" style="color: var(--primary-blue);">Política de Privacidad</a>.</p>
-            </div>
-            <button type="submit" class="btn-primary submit-btn" id="cta-formulario" onclick="gtag('event', 'submit_form', {'event_category': 'Contacto', 'event_label': 'Formulario Inicio WhatsApp'});">Solicitar Atención por WhatsApp</button>
-        </form>
-    </section>
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/56993706069?text=Hola%20Radio%20Nazareo!" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-    <section class="ubicacion">
-        <div class="ubicacion-content">
-            <h2>Nuestra Ubicación en Viña del Mar</h2>
-            <p>📍 Arlegui 160, Edificio Lautaro Oficina 101, Viña del Mar.</p>
-            <a href="https://maps.app.goo.gl/MetQZS2soYKhx2EDA" target="_blank" rel="noopener noreferrer"
-                class="btn-secondary map-btn">Ver en Google Maps</a>
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3344.6042456424584!2d-71.5546287!3d-33.0232533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689e12b7a9776f3%3A0xc3cfce55d3e23076!2sArlegui%20160%2C%20Vi%C3%B1a%20del%20Mar%2C%20Valpara%C3%ADso!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl"
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" title="Ubicación de BeopenSound en Viña del Mar"></iframe>
-            </div>
-        </div>
-    </section>
-    </main>
+    <!-- Back to Top Button -->
+    <a href="#home" id="back-to-top" class="back-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <!-- Footer -->
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo"><span style="color: white;">Beopen</span><span class="logo-sound">Sound</span></div>
-            <p>Centro Auditivo especializado en Viña del Mar.</p>
-            <nav class="footer-nav" aria-label="Navegación de pie de página"><a href="/">Inicio</a><a href="/audifonos">Audífonos</a><a href="/audiometria">Audiometría</a><a href="/lavado-de-oidos">Lavado de Oídos</a><a href="/calibracion-de-audifonos">Calibración</a><a href="/nosotros">Nosotros</a><a href="/preguntas-frecuentes">FAQ</a><a href="/contacto">Contacto</a><a href="/politica-de-privacidad">Privacidad</a></nav>
-            <div class="footer-contact">
-                <p>📍 Arlegui 160, Edificio Lautaro Oficina 101, Viña del Mar</p>
-                <p>📞 <a href="tel:+56971372348" id="cta-telefono-footer">+56 9 7137 2348</a></p>
-                <p>✉️ <a href="mailto:contacto.beopensound@gmail.com">contacto.beopensound@gmail.com</a></p>
-                <p>🕒 Lun a Vie: 09:00 - 20:00 | Sáb: 10:00 - 14:00<br>
-                   <span style="font-size: 0.85rem; opacity: 0.7;">*Atención bajo reserva. Horarios flexibles previa coordinación.</span>
-                </p>
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Logo Colegio Nazareo" style="height: 50px;">
+                <h2>Desde la punta del cerro y más allá</h2>
+            </div>
+            <p>El programa radial del Colegio Nazareo.</p>
+            <div class="social-links">
+                <a href="https://open.spotify.com/show/2euOEAlQutCqdzQcsWM5pZ" target="_blank" rel="noopener noreferrer" class="spotify-link" title="Spotify" aria-label="Escúchanos en Spotify"><i class="fa-brands fa-spotify"></i></a>
+                <a href="#" aria-label="Síguenos en Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" aria-label="Síguenos en Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Síguenos en YouTube"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2026 BeopenSound. Todos los derechos reservados. <a href="/politica-de-privacidad" style="color: white; margin-left: 10px; text-decoration: underline;">Política de Privacidad</a></p></div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Colegio Nazareo. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <a href="https://wa.me/56971372348?text=Hola,%20me%20comunico%20con%20el%20centro%20audiológico%20BeopenSound.%20Me%20gustaría%20recibir%20orientación%20sobre%20sus%20servicios%20y%20agendar%20una%20hora,%20por%20favor." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" id="cta-whatsapp-float" onclick="gtag('event', 'click_whatsapp', {'event_category': 'Contacto', 'event_label': 'Boton Flotante'});">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
+    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
-
 </html>
