@@ -22,7 +22,17 @@
     /* Dimensions */
     --nav-height: 80px;
     --border-radius: 16px;
-    --transition: all 0.3s ease;
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    /* Solo propiedades que se animan de verdad (nada de "all"); transform más rápido para sentirse ágil */
+    --transition: transform 160ms var(--ease-out),
+        box-shadow 200ms var(--ease-out),
+        border-color 200ms var(--ease-out),
+        background-color 200ms var(--ease-out),
+        color 200ms var(--ease-out),
+        opacity 200ms var(--ease-out),
+        visibility 200ms var(--ease-out);
 }
 
 * {
@@ -74,10 +84,12 @@ body {
     transition: var(--transition);
 }
 
-.glass-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 12px 40px 0 rgba(59, 130, 246, 0.15);
+@media (hover: hover) and (pointer: fine) {
+    .glass-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 12px 40px 0 rgba(59, 130, 246, 0.15);
+    }
 }
 
 /* Buttons */
@@ -99,9 +111,11 @@ body {
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
 
-.btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        transform: translateY(-2px);
+    }
 }
 
 .btn-secondary {
@@ -123,11 +137,13 @@ body {
     box-shadow: 0 4px 15px rgba(29, 185, 84, 0.35);
 }
 
-.btn-spotify:hover {
-    background: #1ed760;
-    color: #ffffff;
-    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.6);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .btn-spotify:hover {
+        background: #1ed760;
+        color: #ffffff;
+        box-shadow: 0 6px 20px rgba(29, 185, 84, 0.6);
+        transform: translateY(-2px);
+    }
 }
 
 .badge-spotify {
@@ -257,9 +273,29 @@ body {
     margin-bottom: 1rem;
 }
 
-#live-play-btn.playing {
+/* Un degradado no se puede animar a un color sólido: el rojo es una capa que entra con opacity */
+#live-play-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+#live-play-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: #ef4444;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 200ms var(--ease-out);
+}
+
+#live-play-btn.playing {
     box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+#live-play-btn.playing::before {
+    opacity: 1;
 }
 
 #live-play-btn:disabled {
@@ -309,35 +345,43 @@ body {
     z-index: 2;
 }
 
+/* Altura fija + scaleY: animar "height" recalcula el layout en cada cuadro */
 .sound-wave .bar {
     width: 15px;
+    height: 120px;
     background: var(--accent-gradient);
     border-radius: 10px;
     animation: sound 1s ease-in-out infinite alternate;
+    /* En pausa hasta que la radio suene (JS agrega .is-live); en reposo se ven las alturas de abajo */
+    animation-play-state: paused;
+}
+
+.sound-wave.is-live .bar {
+    animation-play-state: running;
 }
 
 .sound-wave .bar:nth-child(1) {
-    height: 40px;
+    transform: scaleY(0.33);
     animation-delay: 0.1s;
 }
 
 .sound-wave .bar:nth-child(2) {
-    height: 80px;
+    transform: scaleY(0.67);
     animation-delay: 0.3s;
 }
 
 .sound-wave .bar:nth-child(3) {
-    height: 120px;
+    transform: scaleY(1);
     animation-delay: 0.0s;
 }
 
 .sound-wave .bar:nth-child(4) {
-    height: 90px;
+    transform: scaleY(0.75);
     animation-delay: 0.2s;
 }
 
 .sound-wave .bar:nth-child(5) {
-    height: 50px;
+    transform: scaleY(0.42);
     animation-delay: 0.4s;
 }
 
@@ -647,9 +691,11 @@ body {
     transition: var(--transition);
 }
 
-.episode-list-play:hover {
-    background: #1ed760;
-    transform: scale(1.08);
+@media (hover: hover) and (pointer: fine) {
+    .episode-list-play:hover {
+        background: #1ed760;
+        transform: scale(1.08);
+    }
 }
 
 /* Team Section */
@@ -704,10 +750,12 @@ body {
     box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
 }
 
-.pro-card:hover .avatar-glow {
-    transform: scale(1.08);
-    box-shadow: 0 0 30px rgba(250, 204, 21, 0.4);
-    border-color: var(--accent-secondary);
+@media (hover: hover) and (pointer: fine) {
+    .pro-card:hover .avatar-glow {
+        transform: scale(1.08);
+        box-shadow: 0 0 30px rgba(250, 204, 21, 0.4);
+        border-color: var(--accent-secondary);
+    }
 }
 
 .team-card h3 {
@@ -762,10 +810,12 @@ body {
     overflow: hidden;
 }
 
-.student-card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(250, 204, 21, 0.35);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+@media (hover: hover) and (pointer: fine) {
+    .student-card:hover {
+        transform: translateY(-7px);
+        border-color: rgba(250, 204, 21, 0.35);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    }
 }
 
 .avatar-student {
@@ -791,10 +841,12 @@ body {
     border-radius: 50%;
 }
 
-.student-card:hover .avatar-student {
-    transform: scale(1.1);
-    border-color: var(--accent-secondary);
-    box-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
+@media (hover: hover) and (pointer: fine) {
+    .student-card:hover .avatar-student {
+        transform: scale(1.1);
+        border-color: var(--accent-secondary);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
+    }
 }
 
 .student-pill {
@@ -910,9 +962,11 @@ footer {
     visibility: visible;
 }
 
-.back-to-top:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+@media (hover: hover) and (pointer: fine) {
+    .back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+    }
 }
 
 .whatsapp-float {
@@ -934,11 +988,13 @@ footer {
     z-index: 999;
 }
 
-.whatsapp-float:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.7);
-    background: #2fe375;
-    color: white;
+@media (hover: hover) and (pointer: fine) {
+    .whatsapp-float:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.7);
+        background: #2fe375;
+        color: white;
+    }
 }
 
 .footer-logo {
@@ -979,9 +1035,11 @@ footer {
     transition: var(--transition);
 }
 
-.social-links a:hover {
-    background: var(--accent-primary);
-    transform: translateY(-3px);
+@media (hover: hover) and (pointer: fine) {
+    .social-links a:hover {
+        background: var(--accent-primary);
+        transform: translateY(-3px);
+    }
 }
 
 .social-links a.spotify-link:hover {
@@ -994,6 +1052,17 @@ footer {
     padding-top: 2rem;
     color: var(--text-muted);
     font-size: 0.9rem;
+}
+
+/* Feedback al presionar (va después de los hover para ganar la cascada) */
+.btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.episode-list-play:active,
+.back-to-top:active,
+.whatsapp-float:active {
+    transform: scale(0.95);
 }
 
 /* Animations */
@@ -1013,11 +1082,11 @@ footer {
 
 @keyframes sound {
     0% {
-        height: 10px;
+        transform: scaleY(0.083);
     }
 
     100% {
-        height: 120px;
+        transform: scaleY(1);
     }
 }
 
@@ -1049,11 +1118,9 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* El menú siempre existe en el layout; se muestra con opacity/transform
+       (display:none no se puede animar). visibility lo saca del foco cuando está cerrado. */
     .nav-links {
-        display: none;
-    }
-
-    .nav-links.active {
         display: flex;
         flex-direction: column;
         position: absolute;
@@ -1067,11 +1134,35 @@ footer {
         gap: 1rem;
         border-bottom: 1px solid var(--glass-border);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transform-origin: top right;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px) scale(0.98);
+        transition: opacity 180ms var(--ease-out),
+            transform 220ms var(--ease-out),
+            visibility 220ms var(--ease-out);
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
     }
 
     .mobile-menu {
         display: block;
         cursor: pointer;
+    }
+
+    .mobile-menu i {
+        display: inline-block;
+        transition: transform 220ms var(--ease-out);
+    }
+
+    .mobile-menu[aria-expanded="true"] i {
+        transform: rotate(90deg);
     }
 
     .hero {
@@ -1106,5 +1197,37 @@ footer {
 
     .episodes-container {
         padding: 1.5rem 1.2rem;
+    }
+}
+
+/* Movimiento reducido: se mantienen los cambios de color/opacidad, se quita el movimiento */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .circle,
+    .live-indicator {
+        animation: none;
+    }
+
+    .sound-wave .bar {
+        animation: none;
+    }
+
+    .glass-card:hover,
+    .btn:hover,
+    .btn:active:not(:disabled),
+    .episode-list-play:hover,
+    .episode-list-play:active,
+    .pro-card:hover .avatar-glow,
+    .student-card:hover,
+    .student-card:hover .avatar-student,
+    .back-to-top:hover,
+    .back-to-top:active,
+    .whatsapp-float:hover,
+    .whatsapp-float:active,
+    .social-links a:hover {
+        transform: none;
     }
 }

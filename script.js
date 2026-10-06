@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Entrada breve (fade + 4px) para contenido que cambia de golpe. Con movimiento reducido: solo fade.
+    const ENTER_EASING = 'cubic-bezier(0.23, 1, 0.32, 1)';
+    const animateIn = (el, from = { transform: 'translateY(4px)' }) => {
+        if (!el || !el.animate) return;
+        const start = prefersReducedMotion.matches ? { opacity: 0 } : { opacity: 0, ...from };
+        el.animate([start, { opacity: 1, transform: 'none' }], { duration: 200, easing: ENTER_EASING });
+    };
+
+    // Menú móvil (declarado primero porque el scroll suave también lo cierra)
+    const mobileMenuBtn = document.querySelector('.mobile-menu');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const menuIcon = mobileMenuBtn && mobileMenuBtn.querySelector('i');
+    const setMenuOpen = (open) => {
+        if (!mobileMenuBtn || !navLinksContainer) return;
+        navLinksContainer.classList.toggle('active', open);
+        mobileMenuBtn.setAttribute('aria-expanded', open);
+        if (menuIcon) {
+            menuIcon.classList.toggle('fa-bars', !open);
+            menuIcon.classList.toggle('fa-xmark', open);
+        }
+    };
+
     // 1. Smooth Scrolling for Navigation Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -15,26 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
   
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth'
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
                 });
 
                 // Close mobile menu on navigation
-                const navLinksContainer = document.querySelector('.nav-links');
-                if (navLinksContainer) {
-                    navLinksContainer.classList.remove('active');
-                }
+                setMenuOpen(false);
             }
         });
     });
 
     // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu');
-    const navLinksContainer = document.querySelector('.nav-links');
     if (mobileMenuBtn && navLinksContainer) {
-        const toggleMenu = () => {
-            const isOpen = navLinksContainer.classList.toggle('active');
-            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-        };
+        const toggleMenu = () => setMenuOpen(!navLinksContainer.classList.contains('active'));
         mobileMenuBtn.addEventListener('click', toggleMenu);
         mobileMenuBtn.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -101,21 +117,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const LIVE_STREAM_URL = 'https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=5151&type=ice&mount=stream';
 
     if (livePlayBtn && liveAudio && liveStatus) {
+        const soundWave = document.querySelector('.sound-wave');
+
         const setStatus = (text, state = '') => {
+            const changed = liveStatus.textContent !== text;
             liveStatus.textContent = text;
             liveStatus.classList.remove('on-air', 'off-air');
             if (state) liveStatus.classList.add(state);
-            if (liveDot) liveDot.hidden = state !== 'on-air';
+            if (changed) animateIn(liveStatus);
+            if (liveDot) {
+                const wasHidden = liveDot.hidden;
+                liveDot.hidden = state !== 'on-air';
+                if (wasHidden && !liveDot.hidden) animateIn(liveDot, { transform: 'scale(0.5)' });
+            }
+        };
+
+        // El texto del botón cambia de golpe; se re-crea el <span> y se anima su entrada
+        const setButtonLabel = (html) => {
+            livePlayBtn.innerHTML = `<span class="btn-label">${html}</span>`;
+            animateIn(livePlayBtn.firstElementChild);
         };
 
         const showPlayIcon = () => {
+            if (!livePlayBtn.classList.contains('playing')) return;
             livePlayBtn.classList.remove('playing');
-            livePlayBtn.innerHTML = '<i class="fa-solid fa-play"></i> Escuchar en Vivo';
+            setButtonLabel('<i class="fa-solid fa-play"></i> Escuchar en Vivo');
         };
 
         const showStopIcon = () => {
+            if (livePlayBtn.classList.contains('playing')) return;
             livePlayBtn.classList.add('playing');
-            livePlayBtn.innerHTML = '<i class="fa-solid fa-stop"></i> En Vivo Ahora';
+            setButtonLabel('<i class="fa-solid fa-stop"></i> En Vivo Ahora');
         };
 
         const stopStream = () => {
@@ -123,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             liveAudio.removeAttribute('src');
             liveAudio.load();
             showPlayIcon();
+            if (soundWave) soundWave.classList.remove('is-live');
         };
 
         livePlayBtn.addEventListener('click', () => {
@@ -145,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
             livePlayBtn.disabled = false;
             showStopIcon();
             setStatus('En vivo ahora', 'on-air');
+            if (soundWave) soundWave.classList.add('is-live');
         });
 
         liveAudio.addEventListener('error', () => {
