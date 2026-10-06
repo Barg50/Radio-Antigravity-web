@@ -301,7 +301,36 @@ h2 em {
     pointer-events: none;
 }
 
+/* Video de fondo: las ondas nacen a la derecha (donde está la tarjeta). En pantallas angostas
+   object-position muestra esa zona. Un degradado lateral mantiene el texto legible. */
+.hero-video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 80% 50%;
+    pointer-events: none;
+}
+
+.hero:has(.hero-video)::before {
+    display: none;
+}
+
+.hero:has(.hero-video)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(0deg, rgba(6, 15, 28, 0.75) 0%, rgba(6, 15, 28, 0) 38%),
+        linear-gradient(90deg, rgba(6, 15, 28, 0.78) 0%, rgba(6, 15, 28, 0.4) 55%, rgba(6, 15, 28, 0.1) 100%);
+    pointer-events: none;
+}
+
 .hero-grid {
+    z-index: 2;
     position: relative;
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;

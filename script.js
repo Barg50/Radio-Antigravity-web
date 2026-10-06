@@ -169,6 +169,23 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(step);
     };
 
+    // ------------------------------------------------------------------
+    // Video de fondo del hero: se quita con movimiento reducido o ahorro de datos
+    // (el fondo estático de CSS queda como respaldo) y se pausa cuando no se ve
+    // ------------------------------------------------------------------
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo) {
+        const saveData = navigator.connection && navigator.connection.saveData;
+        if (prefersReducedMotion.matches || saveData) {
+            heroVideo.remove();
+        } else if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) heroVideo.play().catch(() => {});
+                else heroVideo.pause();
+            }, { threshold: 0.05 }).observe(heroVideo);
+        }
+    }
+
     // 1. Menú móvil
     const navbar = $('navbar');
     const menuBtn = document.querySelector('.mobile-menu');
