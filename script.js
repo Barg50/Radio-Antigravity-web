@@ -11,6 +11,164 @@ document.addEventListener('DOMContentLoaded', () => {
         el.animate([start, { opacity: 1, transform: 'none' }], { duration: 200, easing: ENTER_EASING });
     };
 
+    // ------------------------------------------------------------------
+    // Ecualizador "reactivo": cada barra se mueve con un patrón que imita la música
+    // (golpes de ritmo fuertes en los graves de la izquierda, agudos más nerviosos a la derecha).
+    // No lee el audio real: el servidor del stream no envía cabeceras CORS y analizarlo silenciaría el sonido.
+    // Solo se anima transform (scaleY) y se asigna directo al elemento.
+    // ------------------------------------------------------------------
+    const eqGroups = [...document.querySelectorAll('.eq')].map((eq) => {
+        const bars = [...eq.querySelectorAll('i')];
+        return bars.map((el, k) => {
+            // altura de reposo: se lee del CSS para no duplicar los valores
+            const base = new DOMMatrixReadOnly(getComputedStyle(el).transform).d || 0.4;
+            return { el, base, value: base, pos: bars.length > 1 ? k / (bars.length - 1) : 0, k };
+        });
+    });
+    const eqBars = eqGroups.flat();
+    let eqRunning = false;
+    let eqActive = false;   // true = sonando; false = volviendo al reposo
+    let eqRaf = 0;
+    let eqLast = 0;
+
+    const eqFrame = (now) => {
+        const dt = Math.min((now - eqLast) / 1000, 0.05);
+        eqLast = now;
+        const t = now / 1000;
+        const beat = Math.pow(Math.max(0, Math.sin(t * Math.PI * 4)), 6);   // golpe a ~120 bpm
+        const swell = 0.7 + 0.3 * Math.sin(t * 0.8);                       // el "volumen" sube y baja lento
+        let settled = true;
+
+        eqBars.forEach((b) => {
+            let target = b.base;
+            if (eqActive) {
+                const bass = 1 - b.pos * 0.65;
+                const wobble = 0.5 + 0.5 * Math.sin(t * (3.1 + b.k * 1.7) + b.k * 2.3) * Math.sin(t * (1.3 + b.k * 0.9) + b.k);
+                target = 0.14 + 0.86 * Math.min(1, swell * (beat * bass * 0.85 + wobble * 0.62));
+            }
+            // ataque rápido, caída más lenta (así se sienten los golpes)
+            const rate = target > b.value ? 30 : 9;
+            b.value += (target - b.value) * (1 - Math.exp(-dt * rate));
+            b.el.style.transform = `scaleY(${b.value.toFixed(3)})`;
+            if (Math.abs(target - b.value) > 0.01) settled = false;
+        });
+
+        if (!eqActive && settled) {
+            eqBars.forEach((b) => { b.el.style.transform = ''; b.value = b.base; });
+            eqRunning = false;
+            return;
+        }
+        eqRaf = requestAnimationFrame(eqFrame);
+    };
+
+    const setEqActive = (active) => {
+        eqActive = active && !prefersReducedMotion.matches;
+        if (!eqRunning && eqActive) {
+            eqRunning = true;
+            eqLast = performance.now();
+            eqRaf = requestAnimationFrame(eqFrame);
+        }
+    };
+
+    // ------------------------------------------------------------------
+    // Ondas de radio: círculos que se expanden desde el botón de play
+    // ------------------------------------------------------------------
+    const playWrap = $('play-wrap');
+    const emitRings = (count = 3, variant = '') => {
+        if (!playWrap || !playWrap.animate || prefersReducedMotion.matches) return;
+        for (let i = 0; i < count; i++) {
+            const ring = document.createElement('span');
+            ring.className = `wave-ring ${variant}`;
+            ring.setAttribute('aria-hidden', 'true');
+            playWrap.appendChild(ring);
+            const anim = ring.animate(
+                [
+                    { transform: 'scale(0.55)', opacity: 0.6 },
+                    { transform: 'scale(5.5)', opacity: 0 }
+                ],
+                { duration: 1500, delay: i * 240, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'backwards' }
+            );
+            anim.onfinish = () => ring.remove();
+        }
+    };
+    let ambientRings = 0;
+    const setAmbientRings = (on) => {
+        clearInterval(ambientRings);
+        if (on) ambientRings = setInterval(() => { if (!document.hidden) emitRings(1, 'live'); }, 3200);
+    };
+
+    // ------------------------------------------------------------------
+    // Confeti (canvas, sin librerías) para celebrar el saludo enviado
+    // ------------------------------------------------------------------
+    const burstConfetti = (originEl) => {
+        if (prefersReducedMotion.matches) return;
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.setAttribute('aria-hidden', 'true');
+        canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3000';
+        document.body.appendChild(canvas);
+        ctx.scale(dpr, dpr);
+
+        const rect = originEl.getBoundingClientRect();
+        const ox = rect.left + rect.width / 2;
+        const oy = rect.top + rect.height / 2;
+        const colors = ['#f2b93b', '#ffd978', '#8fd3f0', '#ffffff', '#ff5d4d'];
+        const rand = (a, b) => a + Math.random() * (b - a);
+        const parts = Array.from({ length: 110 }, () => {
+            const angle = -Math.PI / 2 + rand(-0.75, 0.75);
+            const speed = rand(520, 1150);
+            return {
+                x: ox, y: oy,
+                vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+                size: rand(6, 11), rot: rand(0, Math.PI * 2), vr: rand(-9, 9),
+                color: colors[Math.floor(Math.random() * colors.length)],
+                round: Math.random() < 0.3, life: rand(1500, 2300)
+            };
+        });
+
+        const start = performance.now();
+        let last = start;
+        const step = (now) => {
+            const dt = Math.min((now - last) / 1000, 0.05);
+            last = now;
+            const age = now - start;
+            ctx.clearRect(0, 0, w, h);
+            let alive = false;
+            parts.forEach((p) => {
+                if (age > p.life) return;
+                alive = true;
+                p.vy += 1700 * dt;                  // gravedad
+                p.vx *= Math.pow(0.12, dt);         // roce con el aire
+                p.vy *= Math.pow(0.35, dt);
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+                p.rot += p.vr * dt;
+                ctx.globalAlpha = Math.min(1, (p.life - age) / 450);
+                ctx.fillStyle = p.color;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot);
+                if (p.round) {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.66);
+                }
+                ctx.restore();
+            });
+            if (alive) requestAnimationFrame(step);
+            else canvas.remove();
+        };
+        requestAnimationFrame(step);
+    };
+
     // 1. Menú móvil
     const navbar = $('navbar');
     const menuBtn = document.querySelector('.mobile-menu');
@@ -189,6 +347,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 animateIn(playBtn.firstElementChild);
             }
 
+            // Animaciones ligadas al estado: ecualizador, y ondas (ráfaga al presionar y al salir al aire, suaves mientras suena)
+            setEqActive(next === 'live');
+            setAmbientRings(next === 'live');
+            if (next === 'connecting') emitRings(2);
+            if (next === 'live' && prev !== 'live') emitRings(3, 'live');
+
             if ('mediaSession' in navigator && next === 'live') {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'Radio Nazareo en vivo',
@@ -241,6 +405,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = `Hola Radio Nazareo! Soy ${name} y quiero enviar este saludo/petición: ${message}`;
             window.open(`https://wa.me/56993706069?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
             greetingForm.reset();
+            const submitBtn = greetingForm.querySelector('button[type="submit"]');
+            burstConfetti(submitBtn);
+            // WhatsApp se abre en otra pestaña/app: si la persona se va, el confeti se repite al volver
+            const submittedAt = Date.now();
+            let pending = false;
+            const onVisibility = () => {
+                if (document.hidden && Date.now() - submittedAt < 4000) pending = true;
+                if (!document.hidden && pending) {
+                    pending = false;
+                    document.removeEventListener('visibilitychange', onVisibility);
+                    burstConfetti(submitBtn);
+                }
+                if (Date.now() - submittedAt > 120000) document.removeEventListener('visibilitychange', onVisibility);
+            };
+            document.addEventListener('visibilitychange', onVisibility);
 
             submitLabel.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> ¡Listo! Abriendo WhatsApp';
             animateIn(submitLabel);
