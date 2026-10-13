@@ -735,24 +735,127 @@ h2 em {
     letter-spacing: -0.015em;
 }
 
-/* En vivo */
+/* En vivo: tres fichas (cuándo · cómo · participa) y el equipo a lo ancho */
 .live-grid {
     display: grid;
-    grid-template-columns: minmax(0, 380px) 1fr;
-    gap: 2rem;
-    align-items: start;
-    justify-content: center;
+    grid-template-columns: 1.15fr 1fr 1fr;
+    gap: 1.5rem;
 }
 
-.story {
-    overflow: hidden;
+.live-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.75rem 1.6rem;
 }
 
-.story img {
-    width: 100%;
-    aspect-ratio: 9 / 16;
-    object-fit: cover;
-    background: #000;
+.tile-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 0.35rem;
+    border-radius: 12px;
+    background: rgba(143, 211, 240, 0.1);
+    color: var(--sky);
+    font-size: 1.1rem;
+}
+
+.tile-kicker {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.tile-text {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.tile-big {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.tile-big span {
+    display: block;
+    margin-top: 0.35rem;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.tile-when {
+    border-color: rgba(242, 185, 59, 0.3);
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(242, 185, 59, 0.14), transparent 60%),
+        var(--surface);
+}
+
+.tile-when .tile-icon {
+    background: rgba(242, 185, 59, 0.14);
+    color: var(--gold-2);
+}
+
+.tile-steps {
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    gap: 0.7rem;
+}
+
+.tile-steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+.tile-steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.tile-steps b {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.tile-link {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    color: var(--sky);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.tile-link i {
+    display: inline-block;
+    margin-left: 4px;
+    transition: transform 200ms var(--ease-out);
+}
+
+.live-grid .team-mini {
+    grid-column: 1 / -1;
 }
 
 .team-mini {
@@ -932,12 +1035,15 @@ h2 em {
 }
 
 .episode-list {
-    max-width: 900px;
-    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-top: 3rem;
 }
 
 .episode-list-heading {
-    margin-bottom: 1rem;
+    grid-column: 1 / -1;
+    margin-bottom: 0.1rem;
     color: var(--muted);
     font-family: var(--font-body);
     font-size: 0.85rem;
@@ -958,10 +1064,6 @@ h2 em {
     color: var(--text);
     text-decoration: none;
     transition: var(--transition);
-}
-
-.episode-item + .episode-item {
-    margin-top: 0.9rem;
 }
 
 .episode-item-info {
@@ -1367,6 +1469,8 @@ h2 em {
     .nav-links a:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
     .team-mini .card-link:hover { background: rgba(255, 255, 255, 0.04); }
     .card-link:hover i { transform: translateX(4px); }
+    .tile-link:hover i { transform: translateX(4px); }
+    .tile-link[href="#home"]:hover i { transform: translateY(-3px); }
     .pro-card:hover,
     .student-card:hover { transform: translateY(-5px); border-color: var(--line-strong); }
     .episode-item:hover { transform: translateY(-2px); border-color: rgba(29, 185, 84, 0.45); background: rgba(17, 35, 64, 0.85); }
@@ -1447,13 +1551,15 @@ h2 em {
     }
 
     .live-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .story {
-        max-width: 380px;
-        width: 100%;
-        margin-inline: auto;
+    .tile-when {
+        grid-column: 1 / -1;
+    }
+
+    .episode-list {
+        grid-template-columns: 1fr;
     }
 
     .episode-feature {
@@ -1463,6 +1569,10 @@ h2 em {
 }
 
 @media (max-width: 768px) {
+    .live-grid {
+        grid-template-columns: 1fr;
+    }
+
     /* El menú siempre existe en el layout y se muestra con opacity/transform
        (display:none no se puede animar). visibility lo saca del foco cuando está cerrado. */
     .nav-links {
