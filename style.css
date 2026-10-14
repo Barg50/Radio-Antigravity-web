@@ -1041,6 +1041,11 @@ h2 em {
     margin-top: 3rem;
 }
 
+/* Con un número impar de episodios, el último ocupa la fila completa */
+.episode-list > .episode-item:last-child:nth-child(even) {
+    grid-column: 1 / -1;
+}
+
 .episode-list-heading {
     grid-column: 1 / -1;
     margin-bottom: 0.1rem;
