@@ -4,8 +4,8 @@
   "description": "Radio escolar del Colegio Nazareo. Transmitiendo en vivo todos los miércoles a las 13:00 hrs.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#060f1c",
-  "theme_color": "#060f1c",
+  "background_color": "#070b16",
+  "theme_color": "#070b16",
   "icons": [
     {
       "src": "assets/logo.png",
