@@ -1,40 +1,42 @@
 /* ==========================================================================
    Radio Nazareo — estilos
-   Paleta tomada del escudo del Colegio Nazareo (azul marino, dorado, celeste).
-   Tipografía: Bricolage Grotesque (títulos) + Figtree (texto).
+   Paleta tomada del escudo del Colegio Nazareo (azul marino, dorado, celeste) + violeta de acento.
+   Tipografía: Instrument Serif (títulos) + Manrope (texto).
+   Estética "Aurora": manchas de color de fondo, grano y paneles de vidrio sobre el video de ondas.
    ========================================================================== */
 
 :root {
     /* Superficies */
-    --bg: #060f1c;
-    --bg-alt: #0a1a30;
-    --surface: rgba(17, 35, 64, 0.62);
-    --surface-solid: #0e2039;
-    --line: rgba(255, 255, 255, 0.09);
-    --line-strong: rgba(255, 255, 255, 0.16);
+    --bg: #070b16;
+    --bg-alt: transparent;
+    --surface: rgba(255, 255, 255, 0.055);
+    --surface-solid: #0d1424;
+    --line: rgba(255, 255, 255, 0.11);
+    --line-strong: rgba(255, 255, 255, 0.18);
 
     /* Texto */
-    --text: #f3f6fa;
-    --muted: #9db3c8;
+    --text: #eef2fa;
+    --muted: #a3adc2;
 
     /* Marca */
-    --gold: #f2b93b;
-    --gold-2: #ffd978;
-    --gold-gradient: linear-gradient(135deg, #f2b93b, #ffd978);
+    --gold: #f2c35a;
+    --gold-2: #ffdc8a;
+    --gold-gradient: linear-gradient(135deg, #f2c35a, #ffdc8a);
     --sky: #8fd3f0;
+    --violet: #7b6cff;
     --live: #ff5d4d;
     --spotify: #1db954;
     --on-gold: #1b1405;
 
     /* Tipografía */
-    --font-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
-    --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     /* Forma */
-    --radius: 20px;
-    --radius-sm: 14px;
+    --radius: 26px;
+    --radius-sm: 16px;
     --nav-height: 72px;
-    --shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+    --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.6);
 
     /* Movimiento */
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -92,10 +94,10 @@ h2,
 h3,
 h4 {
     font-family: var(--font-display);
-    font-optical-sizing: auto;
-    font-weight: 700;
-    line-height: 1.08;
-    letter-spacing: -0.025em;
+    /* Instrument Serif solo tiene peso 400 */
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.015em;
     text-wrap: balance;
 }
 
@@ -103,14 +105,11 @@ p {
     text-wrap: pretty;
 }
 
-/* Palabra destacada en dorado dentro de los títulos */
+/* Palabra destacada en dorado y cursiva dentro de los títulos */
 h1 em,
 h2 em {
-    font-style: normal;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-style: italic;
+    color: var(--gold);
 }
 
 :focus-visible {
@@ -193,13 +192,13 @@ h2 em {
     inset: 0 0 auto;
     z-index: 1000;
     height: var(--nav-height);
-    background: rgba(6, 15, 28, 0);
+    background: rgba(7, 11, 22, 0);
     border-bottom: 1px solid transparent;
     transition: background-color 250ms var(--ease-out), border-color 250ms var(--ease-out), backdrop-filter 250ms var(--ease-out);
 }
 
 .navbar.scrolled {
-    background: rgba(6, 15, 28, 0.82);
+    background: rgba(13, 20, 36, 0.72);
     border-bottom-color: var(--line);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
@@ -218,10 +217,9 @@ h2 em {
     gap: 10px;
     color: var(--text);
     text-decoration: none;
-    font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
 }
 
 .logo img {
@@ -284,10 +282,8 @@ h2 em {
     align-items: center;
     padding: calc(var(--nav-height) + 2rem) 0 4rem;
     overflow: hidden;
-    background:
-        radial-gradient(ellipse 60% 55% at 12% 18%, rgba(242, 185, 59, 0.16), transparent 70%),
-        radial-gradient(ellipse 55% 50% at 92% 88%, rgba(143, 211, 240, 0.13), transparent 70%),
-        var(--bg);
+    /* Transparente: detrás está la aurora de fondo (.aurora) */
+    background: transparent;
 }
 
 /* Anillos de "onda de radio" detrás de la tarjeta (estáticos, sin costo de rendimiento) */
@@ -311,6 +307,9 @@ h2 em {
     height: 100%;
     object-fit: cover;
     object-position: 80% 50%;
+    /* "screen" deja ver la aurora a través del fondo oscuro del video; las ondas doradas siguen encima */
+    mix-blend-mode: screen;
+    opacity: 0.95;
     pointer-events: none;
 }
 
@@ -324,8 +323,8 @@ h2 em {
     inset: 0;
     z-index: 1;
     background:
-        linear-gradient(0deg, rgba(6, 15, 28, 0.75) 0%, rgba(6, 15, 28, 0) 38%),
-        linear-gradient(90deg, rgba(6, 15, 28, 0.78) 0%, rgba(6, 15, 28, 0.4) 55%, rgba(6, 15, 28, 0.1) 100%);
+        linear-gradient(0deg, rgba(7, 11, 22, 0.85) 0%, rgba(7, 11, 22, 0) 35%),
+        linear-gradient(90deg, rgba(7, 11, 22, 0.7) 0%, rgba(7, 11, 22, 0.25) 55%, rgba(7, 11, 22, 0) 100%);
     pointer-events: none;
 }
 
@@ -346,10 +345,12 @@ h2 em {
     padding: 6px 16px 6px 8px;
     border: 1px solid var(--line-strong);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--sky);
+    background: rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    color: var(--muted);
     font-size: 0.88rem;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .eyebrow-logo {
@@ -359,9 +360,9 @@ h2 em {
 }
 
 .hero h1 {
-    font-size: clamp(2.7rem, 6.2vw, 5.2rem);
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+    font-size: clamp(3.2rem, 7.6vw, 6.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
     margin-bottom: 1.4rem;
 }
 
@@ -916,19 +917,18 @@ h2 em {
     display: grid;
     place-items: center;
     border-radius: 50%;
-    border: 2px solid rgba(143, 211, 240, 0.35);
-    background: linear-gradient(135deg, rgba(143, 211, 240, 0.18), rgba(143, 211, 240, 0.05));
+    border: 1px solid var(--line);
+    background: linear-gradient(135deg, rgba(143, 211, 240, 0.32), rgba(123, 108, 255, 0.32));
     color: var(--sky);
     font-family: var(--font-display);
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 0.02em;
 }
 
 .av-gold {
-    border-color: rgba(242, 185, 59, 0.5);
-    background: linear-gradient(135deg, rgba(242, 185, 59, 0.22), rgba(242, 185, 59, 0.06));
-    color: var(--gold-2);
+    background: linear-gradient(135deg, rgba(242, 195, 90, 0.65), rgba(242, 195, 90, 0.18));
+    color: #1b1405;
     font-size: 1.1rem;
 }
 
@@ -1464,6 +1464,156 @@ h2 em {
 }
 
 /* ==========================================================================
+   Aurora: fondo de color, grano y vidrio
+   ========================================================================== */
+/* Manchas de color fijas detrás de todo; se mueven solo con transform (barato) */
+.aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    filter: blur(70px) saturate(1.2);
+    pointer-events: none;
+}
+
+.aurora i {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: aurora-drift 24s ease-in-out infinite alternate;
+}
+
+.aurora i:nth-child(1) { width: 55vw; height: 55vw; left: -12vw; top: -18vw; background: #1d4877; }
+.aurora i:nth-child(2) { width: 38vw; height: 38vw; right: -8vw; top: 12vh; background: var(--gold); opacity: 0.26; animation-duration: 30s; }
+.aurora i:nth-child(3) { width: 45vw; height: 45vw; left: 30vw; top: 55vh; background: var(--violet); opacity: 0.32; animation-duration: 36s; }
+.aurora i:nth-child(4) { width: 30vw; height: 30vw; left: 4vw; top: 72vh; background: var(--sky); opacity: 0.26; animation-duration: 27s; }
+
+@keyframes aurora-drift {
+    to { transform: translate(8vw, 6vh) scale(1.15); }
+}
+
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.07;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Vidrio en tarjetas, tarjeta "Al aire", episodios y botón secundario */
+.card,
+.onair,
+.episode-item {
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    backdrop-filter: blur(20px) saturate(1.3);
+}
+
+.onair {
+    border-radius: 30px;
+}
+
+.btn-ghost {
+    background: rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+.mini {
+    background: rgba(13, 20, 36, 0.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    backdrop-filter: blur(20px) saturate(1.3);
+}
+
+.footer {
+    background: rgba(4, 7, 14, 0.55);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+/* Ajustes de la serif: nombres y números un poco más grandes, sin negrita */
+.pro-card h3,
+.student-card h3,
+.card-head h3,
+.episode-title {
+    font-size: 1.7rem;
+}
+
+.section-header h2 {
+    font-size: clamp(2.6rem, 5.4vw, 4.2rem);
+}
+
+.footer h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.countdown div {
+    background: rgba(0, 0, 0, 0.22);
+}
+
+.countdown b {
+    font-size: clamp(2.2rem, 3.6vw, 2.8rem);
+    font-weight: 400;
+}
+
+.tile-big {
+    font-weight: 400;
+}
+
+.kicker,
+.episode-item-tag {
+    color: var(--sky);
+}
+
+.kicker {
+    font-weight: 600;
+}
+
+.episode-feature {
+    border-color: var(--line);
+}
+
+.episode-feature::before {
+    background: radial-gradient(circle, rgba(123, 108, 255, 0.22), transparent 70%);
+}
+
+.field input,
+.field textarea {
+    background: rgba(0, 0, 0, 0.22);
+    border-radius: 18px;
+}
+
+/* Navegación tipo píldora flotante (solo escritorio: en móvil queda la barra con menú desplegable) */
+@media (min-width: 769px) {
+    .navbar {
+        top: 14px;
+        left: 50%;
+        right: auto;
+        width: min(1160px, calc(100% - 2.5rem));
+        height: 62px;
+        transform: translateX(-50%);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        -webkit-backdrop-filter: blur(20px) saturate(1.3);
+        backdrop-filter: blur(20px) saturate(1.3);
+    }
+
+    .navbar.scrolled {
+        border-bottom-color: var(--line);
+    }
+
+    .navbar .nav-container {
+        width: 100%;
+        padding: 0 10px 0 18px;
+    }
+
+    .nav-links a.active {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* ==========================================================================
    Hover (solo mouse), presión y animaciones
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
@@ -1588,7 +1738,7 @@ h2 em {
         flex-direction: column;
         gap: 4px;
         padding: 0.8rem 1.25rem 1.2rem;
-        background: rgba(6, 15, 28, 0.97);
+        background: rgba(7, 11, 22, 0.97);
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--line);
@@ -1619,7 +1769,7 @@ h2 em {
     }
 
     .navbar {
-        background: rgba(6, 15, 28, 0.7);
+        background: rgba(7, 11, 22, 0.85);
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
     }
@@ -1669,7 +1819,8 @@ h2 em {
         scroll-behavior: auto;
     }
 
-    .chip i {
+    .chip i,
+    .aurora i {
         animation: none !important;
     }
 
