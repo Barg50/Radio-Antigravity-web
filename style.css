@@ -932,17 +932,6 @@ h2 em {
     font-size: 1.1rem;
 }
 
-.av-lg {
-    width: 76px;
-    height: 76px;
-    margin-bottom: 1.1rem;
-    font-size: 1.5rem;
-}
-
-.av-lg.av-gold {
-    font-size: 1.8rem;
-}
-
 /* Episodios */
 .episode-feature {
     display: grid;
@@ -1112,31 +1101,6 @@ h2 em {
 }
 
 /* Equipo */
-.team-pros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.6rem;
-    max-width: 780px;
-    margin: 0 auto 4rem;
-}
-
-.pro-card,
-.student-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.pro-card {
-    padding: 2.4rem 1.8rem;
-    border-color: rgba(242, 185, 59, 0.28);
-}
-
-.student-card {
-    padding: 2rem 1.5rem;
-}
-
 .role-badge,
 .pill {
     display: inline-flex;
@@ -1161,16 +1125,6 @@ h2 em {
     background: rgba(143, 211, 240, 0.1);
     border: 1px solid rgba(143, 211, 240, 0.28);
     color: var(--sky);
-}
-
-.pro-card h3 {
-    margin-bottom: 0.2rem;
-    font-size: 1.7rem;
-}
-
-.student-card h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.35rem;
 }
 
 .role {
@@ -1200,16 +1154,157 @@ h2 em {
     color: var(--muted);
 }
 
-/* flex + wrap: la última fila (5.º estudiante) queda centrada en vez de huérfana a la izquierda */
-.students-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+/* Equipo con fotos */
+/* Miniaturas redondas en la ficha "Nuestro equipo" (sección En vivo) */
+.av-photo {
+    object-fit: cover;
+    background: var(--surface-solid);
+}
+
+.av-photo.av-gold {
+    border-color: rgba(242, 195, 90, 0.7);
+}
+
+/* Foto vertical 4:5 con marco suave. Las fotos son de aula, así que el borde y el velo
+   inferior las integran al fondo oscuro de Aurora. */
+.crew-photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: calc(var(--radius) - 10px);
+    background: var(--surface-solid);
+    box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.crew-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms var(--ease-out);
+}
+
+.crew-photo::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 28%;
+    background: linear-gradient(to top, rgba(7, 11, 22, 0.35), transparent);
+    pointer-events: none;
+}
+
+.crew-text h3 {
+    font-size: 1.35rem;
+}
+
+/* Profesores: foto a la izquierda, texto a la derecha */
+.crew-pros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 1.6rem;
+    max-width: 960px;
+    margin: 0 auto 4.5rem;
+}
+
+.crew-pro {
+    display: grid;
+    grid-template-columns: minmax(0, 190px) 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.6rem 1rem 1rem;
+    border-color: rgba(242, 195, 90, 0.28);
+}
+
+.crew-pro h3 {
+    margin-bottom: 0.2rem;
+    font-size: 1.8rem;
+}
+
+.crew-pro .role-badge {
+    margin-bottom: 0.8rem;
+}
+
+/* Estudiantes: 4 fichas con la foto arriba */
+.crew-students {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.4rem;
 }
 
-.students-grid .student-card {
-    flex: 0 1 205px;
+.crew-student {
+    display: flex;
+    flex-direction: column;
+    padding: 0.8rem;
+}
+
+.crew-student .crew-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.1rem 0.5rem 0.7rem;
+}
+
+.crew-student .pill {
+    margin-bottom: 0.7rem;
+}
+
+.crew-student h3 {
+    margin-bottom: 0.45rem;
+}
+
+.crew-student .bio {
+    font-size: 0.92rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .crew-pro:hover .crew-photo img,
+    .crew-student:hover .crew-photo img {
+        transform: scale(1.04);
+    }
+}
+
+@media (max-width: 960px) {
+    .crew-students {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .crew-pro {
+        grid-template-columns: 1fr;
+        padding: 0.9rem;
+    }
+
+    .crew-pro .crew-photo {
+        max-width: 190px;
+        justify-self: center;
+        width: 100%;
+    }
+
+    .crew-pro .crew-text {
+        padding: 0.4rem 0.4rem 0.6rem;
+    }
+
+    .crew-students {
+        gap: 0.9rem;
+    }
+
+    .crew-student {
+        padding: 0.55rem;
+    }
+
+    .crew-student .crew-text {
+        padding: 0.9rem 0.35rem 0.5rem;
+    }
+
+    .crew-student .bio {
+        font-size: 0.85rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .crew-photo img {
+        transition: none;
+    }
 }
 
 /* Formulario */
@@ -1532,8 +1627,6 @@ h2 em {
 }
 
 /* Ajustes de la serif: nombres y números un poco más grandes, sin negrita */
-.pro-card h3,
-.student-card h3,
 .card-head h3,
 .episode-title {
     font-size: 1.7rem;
@@ -1626,8 +1719,6 @@ h2 em {
     .card-link:hover i { transform: translateX(4px); }
     .tile-link:hover i { transform: translateX(4px); }
     .tile-link[href="#home"]:hover i { transform: translateY(-3px); }
-    .pro-card:hover,
-    .student-card:hover { transform: translateY(-5px); border-color: var(--line-strong); }
     .episode-item:hover { transform: translateY(-2px); border-color: rgba(29, 185, 84, 0.45); background: rgba(17, 35, 64, 0.85); }
     .episode-item:hover .episode-play { transform: scale(1.08); }
     .social-links a:hover { transform: translateY(-3px); background: var(--gold); color: var(--on-gold); }
@@ -1865,8 +1956,6 @@ h2 em {
 
     .btn:hover,
     .play-btn:hover,
-    .pro-card:hover,
-    .student-card:hover,
     .episode-item:hover,
     .episode-item:hover .episode-play,
     .social-links a:hover,
