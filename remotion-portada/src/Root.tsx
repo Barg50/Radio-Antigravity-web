@@ -1,7 +1,9 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
 import { Background } from "./Background";
 import { Presentacion } from "./Presentacion";
+import { PortadaReel } from "./showreel/PortadaReel";
+import { Showreel } from "./showreel/Showreel";
 
 // Video de fondo para la portada de la página: sin texto y sin corte al repetirse.
 const PortadaLoop: React.FC = () => (
@@ -28,6 +30,18 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={{ horario: "Todos los miércoles · 13:00 hrs" }}
       />
+      {/* Reel promocional de 18 s para Instagram (vertical 9:16) */}
+      <Composition
+        id="ShowreelVertical"
+        component={Showreel}
+        durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{ voz: null, musica: null }}
+      />
+      {/* Portada del reel para Instagram */}
+      <Still id="PortadaReel" component={PortadaReel} width={1080} height={1920} />
     </>
   );
 };
